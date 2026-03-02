@@ -5,9 +5,9 @@ import cookieParser from "cookie-parser";
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const ClientesRoutes = require("./routes/clienetes.routes");
-const ProductsRoutes = require("./routes/Productos.routes");
-const EmpleadosRoutes = require("./routes/Empleados.routes");
+const ClientesRoutes = require("./routes/clientes.routes");
+const ProductsRoutes = require("./routes/productos.routes");
+const EmpleadosRoutes = require("./routes/empleados.routes");
 const PromocionesRoutes = require("./routes/Promociones.routes");
 import cartRoutes from "./routes/cart.routes";
 

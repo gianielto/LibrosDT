@@ -7,7 +7,7 @@ const {
   createClient,
   deleteClient,
   updateClient,
-} = require("../controllers/Client.controller");
+} = require("../controllers/client.controller");
 
 const router = Router();
 
