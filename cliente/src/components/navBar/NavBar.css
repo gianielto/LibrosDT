@@ -1,0 +1,110 @@
+:root {
+  --color-barra: #c3a38a;
+  --color-fondo: #fff7eb;
+}
+
+.statico {
+  /* position: fixed; */
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.barraMenu {
+  background-color: var(--color-barra);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  min-width: 150px;
+  min-height: 100px;
+  box-sizing: border-box;
+  padding: 2px;
+}
+
+.nombreCliente {
+  font-size: xx-large;
+  font-family: Courier, monospace;
+  text-align: center;
+}
+
+.izquierda {
+  text-align: left;
+  margin-right: auto;
+}
+
+.logo-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  padding: 10px;
+}
+
+.logo {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin: 0 10px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.claro {
+  background-color: var(--color-fondo) !important;
+}
+
+.listaHorizontal {
+  list-style-type: none;
+  margin: 0;
+  padding-right: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.oculto {
+  display: none !important;
+}
+
+/* :root {
+  --color-barra: #c3a38a;
+  --color-fondo: #fff7eb;
+  --navbar-height: 100px;
+  --navbar-small: 60px;
+}
+
+.statico {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  height: var(--navbar-height);
+  background-color: var(--color-barra);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+  transition: height 0.3s ease, padding 0.3s ease;
+}
+
+
+.statico.scrolled {
+  height: var(--navbar-small);
+  padding: 0 10px; 
+}
+
+
+.statico.scrolled:hover {
+  height: var(--navbar-height);
+  padding: 0 20px;
+} */

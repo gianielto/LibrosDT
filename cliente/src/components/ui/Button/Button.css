@@ -1,0 +1,20 @@
+button.Btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #587e77;
+  color: rgb(251, 251, 251);
+  border: solid 2px #4c8077;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.2s ease-in-out;
+  margin: 5px;
+}
+
+button.Btn:hover {
+  background-color: #ddd;
+  cursor: pointer;
+  color: #402e32;
+  border-color: #6d4c2b;
+}

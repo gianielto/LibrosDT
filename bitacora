@@ -1,0 +1,23 @@
+Dia 1. El primer dia se realizo la creacion del repositorio para la migracion
+del proyecto. Se penso tener el proyecto como estaba, con las tecnologias
+del entorno de XAMPP en la rama principal (main) y crear una rama secundaria
+(migracionPERN) para llevar los cambios del codigo.
+Ademas, utilizando ESF Database Migration Toolkit - Pro.lnk descargada desde https://www.dbsofts.com/es/download/, se migro la base de datos en phpMyAdmin
+al gestor de base de datos postgress. Esto permitio conservar de manera integra
+los datos dentro de la bd
+
+Dia 2. En este dia se preparo todo el entorno de trabajo del back end del cliente.
+se instalaron las dependencias y modulos necesarios para el desarrollo del backend
+como lo son express y cors. A su vez, se instalo prisma (que sera la ORM para manejear las consultas a la BD) y se decidio trabajar con TS.
+
+dia 3. El dia de hoy se corrigieron algunos errores a la hora de migrar la base de datos: el primero, se creó una columna con un nombre extraño en cada una de las tablas de la base de datos, por lo que se optó por eliminarla. También, el campo id de la tabla clientes fue importado como big int lo que causó problemas a la hora de hacer peticiones get, pues json no sabe cómo serializar números tan grandes, por lo que se tuvo que modificar el tipo de dato de la columna id de la tabla clientes de bigInt a integer.
+Asi mismo, el dia de hoy se crearon y configuraron los archivos routes/clinetes.routes.ts y controllers/client.controller que sirven para manejar las rutas y la forma en como nuestra aplicacion responde a las peticiones get, put, delete y post respectivamente.
+
+dia 4. El dia de hoy se se preparo el entorno para el fronEnd, se crearon las carpetas components, pages, services, asi mismo se creo el componente NavBar junto con sus estilos. Sin embargo, encontre una oportunidad de mejora para la mejor distribucion de archivos: en un principio mi intencion era que en la carpeta cliente/backend quedaran la api rest para cada una de las entidades de la base de datos, mas estaba olvidando que la parte de administrador tambien va a solicitar de acceso a esos datos. por lo que creo conveniente sacaar la carpeta backend al mismo nivel que clientes y administrador.
+
+dia 5. se crearon y configuraron todas las acciones necesarias para la apiRest de la app. ademas, se corrigion el error de del tipo de dato big int que estaba para la columna id de la tabla clientes. pues aunque ya habia cambiado el tipo de dato en la base de datos era necesario actualizar tambien en prisma.
+cosas que hacer para el dia de mañana 10-09-2025
+realizar configuracion para todas las tablas necesarias a modo de apiREst pra las tablas productos, promociones, empleados, pedidos
+considerar tenerla en una carpeta independiente.
+
+dia 6. comense a crear las vistas y el formulario de registro de usuarios. no se que pasa pero no se estan guardadndo los registros en la base de datos aun cuando en el servidor dice que si. probe usundo thunder y si pude. lo continuare manana

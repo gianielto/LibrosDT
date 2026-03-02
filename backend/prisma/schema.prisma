@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model clientes {
+  id        Int     @id(map: "pk_clientes") @default(autoincrement())
+  nombre    String  @db.VarChar(128)
+  apellidos String  @db.VarChar(128)
+  correo    String  @unique(map: "idx_correo") @db.VarChar(128)
+  pass      String  @db.VarChar(255)
+  telefono  String? @db.VarChar(15)
+  direccion String?
+  eliminado Int?    @default(0)
+}
+
+model empleados {
+  id             Int     @id(map: "pk_empleados") @default(autoincrement())
+  nombre         String? @db.VarChar(128)
+  apellidos      String? @db.VarChar(128)
+  correo         String? @db.VarChar(128)
+  pass           String? @db.VarChar(32)
+  rol            Int?
+  archivo_nombre String? @db.VarChar(255)
+  archivo_file   String? @db.VarChar(128)
+  eliminado      Int?    @default(0)
+}
+
+model pedidos {
+  id                Int                 @id(map: "pk_pedidos") @default(autoincrement())
+  fecha             DateTime            @db.Date
+  id_cliente        Int
+  status            Int?                @default(0)
+  pedidos_productos pedidos_productos[]
+   @@unique([id_cliente, status])
+}
+
+model pedidos_productos {
+  id          Int       @id(map: "pk_pedidos_productos") @default(autoincrement())
+  id_pedido   Int
+  id_producto Int
+  cantidad    Int
+  precio      Float
+  pedidos     pedidos   @relation(fields: [id_pedido], references: [id], onUpdate: Restrict, map: "pedidos_productos_ibfk_1")
+  productos   productos @relation(fields: [id_producto], references: [id], onUpdate: Restrict, map: "pedidos_productos_ibfk_2")
+
+  @@index([id_pedido], map: "idx_id_pedido")
+  @@index([id_producto], map: "idx_id_producto")
+  @@unique([id_pedido, id_producto])
+}
+
+model productos {
+  id                Int                 @id(map: "pk_productos") @default(autoincrement())
+  nombre            String?             @db.VarChar(128)
+  codigo            String?             @db.VarChar(32)
+  descripcion       String?
+  costo             Float?
+  stock             Int?
+  archivo_n         String?             @db.VarChar(255)
+  archivo           String?             @db.VarChar(128)
+  eliminado         Int?                @default(0) @db.SmallInt
+  pedidos_productos pedidos_productos[]
+}
+
+model promociones {
+  id        Int     @id(map: "pk_promociones") @default(autoincrement())
+  nombre    String  @db.VarChar(128)
+  archivo   String? @db.VarChar(64)
+  status    Int?    @default(1)
+  eliminado Int?    @default(0)
+}

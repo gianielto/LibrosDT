@@ -1,0 +1,89 @@
+.card-form-container {
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e3e3e3;
+}
+
+.card-form-title {
+  margin-top: auto;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #4d3f35;
+  margin-bottom: 15px;
+}
+
+.card-form-divider {
+  border: none;
+  height: 5px;
+  background-color: #4d3f35;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.card-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  color: #333;
+  margin: 10px;
+}
+
+.card-form-content input,
+textarea {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  min-height: 30px;
+  margin: 5px;
+  border: solid 1px#333;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  width: 100%;
+}
+.card-form-content textarea {
+  width: 100%;
+  padding: 10px;
+  resize: vertical;
+}
+
+.card-form-content label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #c3a38a;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.error {
+  color: #ff4d4f;
+  background-color: #fff1f0;
+  border: 1px solid #ffa39e;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  animation: fadeOut 5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

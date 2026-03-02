@@ -1,0 +1,589 @@
+body {
+  background-color: #524439;
+  /*
+    background-color: #9db0a3;
+    */
+  margin: 0%;
+  padding-top: 100px;
+}
+.statico {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.oscuro {
+  background-color: #524439 !important;
+}
+
+.claro {
+  background-color: #fff7eb !important;
+}
+.fuenteOscuro {
+  color: #524439;
+}
+
+.fuenteClaro {
+  color: #fff7eb;
+}
+
+.barraMenu {
+  background-color: #c3a38a;
+  display: flex; /* Usamos flexbox */
+  justify-content: space-between; /* Esto alinea los elementos a los extremos */
+  align-items: center; /* Centra los elementos verticalmente */
+  width: 100%;
+  height: 10%; /* Alto del elemento */
+  min-width: 150px;
+  min-height: 100px;
+  box-sizing: border-box;
+
+  padding: 02px; /* Espaciado a los lados */
+  margin-bottom: 20px;
+}
+.barra {
+  background-color: #c3a38a;
+  display: flex; /* Usamos flexbox */
+  justify-content: space-between; /* Esto alinea los elementos a los extremos */
+  align-items: center; /* Centra los elementos verticalmente */
+  width: 100%;
+  height: 80%; /* Alto del elemento */
+  min-width: 150px;
+  min-height: 100px;
+  box-sizing: border-box;
+
+  padding: 02px; /* Espaciado a los lados */
+  margin-bottom: 20px;
+}
+
+.derecha {
+  text-align: right; /* Alinea el contenido a la derecha */
+}
+
+.izquierda {
+  text-align: left; /* Alinea el contenido a la izquierda */
+  align-self: left; /* Mantén el elemento alineado verticalmente */
+  text-align: left; /* Asegura que el texto quede alineado a la izquierda */
+  margin-right: auto;
+}
+
+.nombreCliente {
+  font-size: xx-large;
+  font-family: Courier;
+  text-align: center;
+  /*flex-grow: ;  Esto asegura que el div ocupe el espacio disponible y se centre */
+}
+.centrado {
+  text-align: center;
+}
+.centradoN {
+  text-align: center;
+  align-self: left;
+  align-items: center !important;
+}
+
+.logo {
+  display: inline-block; /* Muestra los logos en línea dentro de la barra */
+  width: 50px; /* Ancho fijo de cada logo */
+  height: 50px; /* Alto fijo de cada logo */
+  margin: 0 10px; /* Espaciado horizontal entre logos */
+  background-size: cover; /* Asegura que la imagen cubra completamente el contenedor */
+  background-position: center; /* Centra la imagen dentro del contenedor */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  border-radius: 50%; /* Opcional: para hacer los logos circulares */
+  background-color: transparent; /* Asegura que no haya fondo */
+}
+
+/* Clase para la barra */
+.logo-bar {
+  display: flex; /* Organiza los elementos horizontalmente */
+  align-items: center; /* Centra los logos verticalmente */
+  justify-content: center; /* Centra los logos horizontalmente */
+  background-color: transparent; /* Fondo claro para la barra */
+  padding: 10px; /* Espaciado dentro de la barra */
+}
+.listaHorizontal {
+  list-style-type: none; /* Elimina los puntos o números de la lista */
+  margin: 0; /* Elimina márgenes predeterminados */
+  padding: 0; /* Elimina padding predeterminado */
+  display: flex; /* Utiliza Flexbox para alinear los elementos horizontalmente */
+  justify-content: center; /* Opcional: Centra la lista horizontalmente */
+  gap: 1rem; /* Espaciado entre los elementos */
+}
+
+.listaHorizontal li {
+  display: inline-block; /* Muestra cada elemento de la lista como un bloque en línea */
+  padding: 0.5rem 1rem; /* Espaciado interno para cada elemento */
+  background-color: #524439; /* Fondo para cada elemento */
+  border-radius: 8px; /* Opcional: Bordes redondeados */
+  color: #fff7ed;
+}
+
+.listaHorizontal li:hover {
+  background-color: #ddd; /* Cambia el fondo al pasar el mouse */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar el mouse */
+  color: #402e32;
+}
+.oculto {
+  display: none !important ;
+}
+.oculto2 {
+  display: none !important ;
+}
+.visible {
+  display: flex !important ;
+}
+
+.barraMenu a {
+  text-decoration: none; /* Quita el subrayado */
+  color: inherit; /* Mantiene el color del texto igual que el elemento padre */
+}
+
+.barraMenu :active,
+a:visited {
+  color: inherit; /* Evita cambios de color al hacer clic o al visitar el enlace */
+}
+.contenedor {
+  width: 100%; /* Ocupa todo el ancho de la pantalla */
+  /*
+    Ocupa el alto de la pantalla menos la altura de la barra 
+    height: calc(100vh - var(--barraH-altura));
+    */
+  height: 100%;
+  box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+  overflow: auto; /* Permite desplazar el contenido si excede la altura
+    
+    margin-bottom: 200px; 
+    */
+  padding-top: 70px;
+}
+hr {
+  height: 5px;
+  border-radius: 15px;
+  margin-bottom: 0;
+}
+
+.row {
+  display: flex; /* Usa Flexbox para alinear los elementos */
+  align-items: center; /* Centra los elementos verticalmente */
+  justify-content: space-between; /* Distribuye los elementos horizontalmente */
+  padding: 10px 20px; /* Espaciado interno */
+  margin-bottom: 20px; /* Espaciado inferior */
+  border-bottom: 2px solid #c3a38a; /* Línea divisoria (opcional) */
+  background-color: #f9f9f9; /* Fondo claro */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera (opcional) */
+}
+
+.titulo {
+  font-size: 40px; /* Tamaño de la letra */
+  font-family: "Segoe UI", sans-serif; /* Fuente Segoe UI */
+  margin: 0; /* Elimina márgenes (opcional) */
+  text-align: center; /* Centra el texto horizontalmente (opcional) */
+}
+.negrita {
+  font-weight: bold;
+} /* 
+
+/*banner*/
+
+.slider-frame {
+  width: 600px;
+  height: 400px;
+  margin: 50px auto 0;
+  overflow: hidden;
+  position: relative;
+}
+.slider-frame ul {
+  display: flex;
+  padding: 0;
+  width: 400%;
+  animation: slide 16s infinite alternate ease-in-out;
+}
+.slider-frame li {
+  list-style: none;
+  width: 25%;
+}
+.slider-frame img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+@keyframes slide {
+  0% {
+    margin-left: 0%;
+  }
+  25% {
+    margin-left: 0%;
+  }
+  30% {
+    margin-left: -100%;
+  }
+  55% {
+    margin-left: -100%;
+  }
+  60% {
+    margin-left: -200%;
+  }
+  85% {
+    margin-left: -200%;
+  }
+  90% {
+    margin-left: -300%;
+  }
+  100% {
+    margin-left: -300%;
+  }
+}
+@-webkit-keyframes slide {
+  /* Mismos valores que en @keyframes */
+  0% {
+    margin-left: 0%;
+  }
+  25% {
+    margin-left: 0%;
+  }
+  30% {
+    margin-left: -100%;
+  }
+  55% {
+    margin-left: -100%;
+  }
+  60% {
+    margin-left: -200%;
+  }
+  85% {
+    margin-left: -200%;
+  }
+  90% {
+    margin-left: -300%;
+  }
+  100% {
+    margin-left: -300%;
+  }
+}
+
+.linea {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: 2px; /* Altura de la línea */
+  background-color: #524439; /* Color de la línea */
+  border: none; /* Sin bordes adicionales */
+  margin: 20px 0; /* Espaciado arriba y abajo (opcional) */
+}
+
+/*formulario */
+/* Diseño general del formulario */
+form {
+  max-width: 600px; /* Limita el ancho del formulario */
+  margin: 50px auto; /* Centra el formulario en la página */
+  padding: 20px; /* Espaciado dentro del formulario */
+  background-color: #f9f9f9; /* Fondo suave */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor del formulario */
+}
+.formulario {
+  max-width: 600px; /* Limita el ancho del formulario */
+  margin: 50px auto; /* Centra el formulario en la página */
+  padding: 20px; /* Espaciado dentro del formulario */
+  background-color: #f9f9f9; /* Fondo suave */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor del formulario */
+}
+
+/* Estilo para las filas del formulario */
+.row {
+  margin-bottom: 15px; /* Espaciado entre los campos */
+}
+
+/* Estilo para las etiquetas */
+label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #524439; /* Color de texto para las etiquetas */
+  display: block;
+  margin-bottom: 5px; /* Espaciado entre la etiqueta y el campo */
+}
+
+/* Estilo para los campos de entrada (input y textarea) */
+input,
+textarea {
+  width: 100%; /* Hace que los campos ocupen todo el ancho del contenedor */
+  padding: 10px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño de la fuente */
+  border: 1px solid #ddd; /* Borde suave */
+  border-radius: 4px; /* Bordes ligeramente redondeados */
+  background-color: #fff; /* Fondo blanco para los campos */
+  color: #333; /* Color del texto */
+  transition: border-color 0.3s ease; /* Efecto de transición al enfocar */
+}
+
+/* Cambio de color del borde al enfocar los campos */
+input:focus,
+textarea:focus {
+  border-color: #524439; /* Borde marrón al enfocar */
+  outline: none; /* Elimina el borde de enfoque predeterminado del navegador */
+}
+
+/* Estilo para el botón */
+button {
+  background-color: #524439; /* Fondo marrón oscuro */
+  color: #fff; /* Texto blanco */
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño de la fuente */
+  border: none; /* Elimina el borde por defecto */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s ease; /* Efecto de transición en el fondo */
+}
+
+/* Cambio de color en el botón al pasar el mouse */
+button:hover {
+  background-color: #3c2a25; /* Fondo marrón más oscuro */
+}
+
+/* Estilo para el área de texto (textarea) */
+textarea {
+  resize: vertical; /* Permite redimensionar solo verticalmente */
+}
+
+/* Agregar espacio adicional en los campos de texto */
+input,
+textarea {
+  margin-top: 5px;
+}
+/*reticula*/
+/* Contenedor general de la retícula */
+.product-grid {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* Ajuste automático */
+  gap: 20px; /* Espaciado entre productos */
+  padding: 20px; /* Espaciado interno */
+  background-color: #f4f4f4; /* Fondo de la retícula */
+  align-self: center;
+}
+
+/* Tarjeta de producto */
+.product-card {
+  /*
+    background-color: #fff;
+      Fondo blanco */
+  /*
+    border: 1px solid #9a7582; 
+     Borde suave */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+  text-align: center; /* Centrar contenido */
+  padding: 20px; /* Espaciado interno */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación al pasar el mouse 
+    max-height: 400px;
+    */
+}
+
+/* Efecto hover en las tarjetas */
+.product-card:hover {
+  transform: translateY(-5px); /* Elevar tarjeta al pasar el mouse */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Imagen del producto */
+.product-card img {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  height: auto; /* Mantiene proporción */
+  border-radius: 8px; /* Bordes redondeados */
+  margin-bottom: 15px; /* Separación de la descripción */
+}
+
+/* Título del producto */
+.product-card h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #524439; /* Color del título */
+  margin-bottom: 10px;
+}
+
+/* Precio del producto */
+.product-card p {
+  font-size: 16px;
+  color: #888; /* Color del precio */
+  margin-bottom: 15px;
+}
+.product-card a {
+  text-decoration: none; /* Quita el subrayado */
+  color: inherit; /* Mantiene el color del texto igual que el elemento padre */
+}
+
+.product-card :active,
+a:visited {
+  color: inherit; /* Evita cambios de color al hacer clic o al visitar el enlace */
+}
+/* Botón de compra */
+.product-card button {
+  background-color: #524439; /* Color principal */
+  color: #fff; /* Texto blanco */
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 14px;
+  border: none; /* Sin borde */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar cursor al pasar */
+  transition: background-color 0.3s ease; /* Transición suave 
+    height: auto;
+    width: auto;
+    */
+}
+
+/* Efecto hover en el botón */
+.product-card button:hover {
+  background-color: #3c2a25; /* Color más oscuro */
+}
+.product-card-input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  align-self: center;
+}
+.product-card input[type="number"] {
+  width: 30%;
+  height: 1%;
+  text-align: center;
+}
+
+/*
+.subirBajar{
+    width: auto !important;
+    height: auto !important;
+}
+*/
+.login {
+  display: flex;
+  border-radius: 8px; /* Bordes redondeados */
+  text-align: center; /* Centrar contenido */
+  padding: 20px; /* Espaciado interno */
+  gap: 2%; /* Espaciado entre los elementos */
+  align-items: center; /* Asegura alineación vertical */
+}
+.login-cantidad {
+  display: flex; /* Alinear los elementos en fila */
+}
+
+.login-cantidad button {
+  background-color: #524439; /* Color principal */
+  color: #fff; /* Texto blanco */
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 1rem; /* Tamaño de fuente relativo */
+  border: none; /* Sin borde */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar cursor al pasar */
+  transition: background-color 0.3s ease; /* Transición suave */
+  width: 30%;
+  display: flex; /* Asegura adaptabilidad */
+  justify-content: center;
+  align-items: center;
+}
+
+.login-cantidad input[type="number"] {
+  width: 30%;
+  /* 
+    padding: 10px; 
+    Ajusta el espacio interno */
+  text-align: center;
+  font-size: 1rem; /* Tamaño de fuente relativo */
+  border: 1px solid #ccc; /* Borde consistente */
+  border-radius: 4px; /* Bordes redondeados */
+  display: flex;
+  align-items: center; /* Centra el contenido */
+}
+
+.tabla {
+  display: table;
+  width: 80%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  border-radius: 8px;
+}
+
+.fila {
+  display: table-row;
+  /* Borde suave */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+  text-align: center; /* Centrar contenido */
+  padding: 20px; /* Espaciado interno */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación al pasar el mouse */
+}
+
+.columna {
+  display: table-cell;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+.columna img {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  height: auto; /* Mantiene proporción */
+  border-radius: 8px; /* Bordes redondeados */
+  margin-bottom: 15px; /* Separación de la descripción */
+}
+/* formulario */
+
+.login {
+  display: flex;
+  border-radius: 8px; /* Bordes redondeados */
+  text-align: center; /* Centrar contenido */
+  padding: 20px; /* Espaciado interno */
+  gap: 2%; /* Espaciado entre los elementos */
+  align-items: center; /* Asegura alineación vertical */
+}
+.login-cantidad {
+  display: flex; /* Alinear los elementos en fila */
+}
+
+.login-cantidad button {
+  background-color: #524439; /* Color principal */
+  color: #fff; /* Texto blanco */
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 1rem; /* Tamaño de fuente relativo */
+  border: none; /* Sin borde */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar cursor al pasar */
+  transition: background-color 0.3s ease; /* Transición suave */
+  width: 30%;
+  display: flex; /* Asegura adaptabilidad */
+  justify-content: center;
+  align-items: center;
+}
+
+.login-cantidad input[type="number"] {
+  width: 30%;
+  /* 
+    padding: 10px; 
+    Ajusta el espacio interno */
+  text-align: center;
+  font-size: 1rem; /* Tamaño de fuente relativo */
+  border: 1px solid #ccc; /* Borde consistente */
+  border-radius: 4px; /* Bordes redondeados */
+  display: flex;
+  align-items: center; /* Centra el contenido */
+}
+
+.especial {
+  display: flex; /* Activar flexbox */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  flex-direction: column; /* Alinear los elementos en columna */
+  width: 100%; /* Ajustar el ancho al contenedor padre */
+  /* Ajustar la altura al contenedor padre */
+  margin: 0 auto; /* Centrar el contenedor si tiene un ancho menor */
+  text-align: center; /* Alinear el texto al centro */
+  position: relative; /* Asegura la relación con su contenedor padre */
+}
+
+.especial img {
+  width: 70%; /* Ajustar el ancho de las imágenes al 50% del contenedor */
+  height: auto; /* Mantener la proporción original de las imágenes */
+  display: block; /* Evitar márgenes inesperados */
+  margin: 0 auto; /* Centrar las imágenes dentro del contenedor */
+}

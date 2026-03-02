@@ -1,0 +1,23 @@
+.button-link {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #524439;
+  color: white;
+  border: solid 2px #402e32;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.2s ease-in-out;
+  margin: 5px;
+}
+
+.button-link:hover {
+  background-color: #ddd; /* Cambia el fondo al pasar el mouse */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar el mouse */
+  color: #402e32;
+  border-color: #6d4c2b;
+}
+.button-link:active {
+  background-color: #bbb; /* Cambia el fondo al hacer clic */
+}

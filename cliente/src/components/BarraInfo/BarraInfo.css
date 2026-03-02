@@ -1,0 +1,73 @@
+/* BarraInfo.css */
+.barraInfo-footer {
+  width: 100vw;
+  background-color: var(--color-barra, #c3a38a);
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 32px 0 16px 0;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.barraInfo-footer .centrado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 180px;
+}
+
+.barraInfo-footer .titulo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #6d4c2b;
+}
+
+.barraInfo-footer .fuenteClaro {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.barraInfo-footer .logo-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.barraInfo-footer .logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff7eb;
+  border: 2px solid #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block;
+}
+
+.barraInfo-footer .logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.barraInfo-footer .derecha {
+  text-align: right;
+}
+
+@media (max-width: 800px) {
+  .barraInfo-footer {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0 8px 0;
+  }
+  .barraInfo-footer .centrado {
+    margin-bottom: 16px;
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "typeRoots": [
+      "./src/types",
+      "./node_modules/@types"
+    ],
+    "target": "ES2020", // Salida JS moderna compatible con Node
+    "module": "CommonJS", // CommonJS es lo que usa Node.js por defecto
+    "lib": [
+      "ES2020"
+    ], // Bibliotecas estándar modernas
+    "rootDir": "./src", // Carpeta de entrada
+    "outDir": "./dist", // Carpeta de salida de los archivos compilados
+    "strict": true, // Reglas estrictas de TS
+    "esModuleInterop": true, // Permite importar módulos CommonJS (como express)
+    "forceConsistentCasingInFileNames": true, // Evita errores por mayúsculas/minúsculas cruzadas
+    "skipLibCheck": true, // Evita chequear tipos de librerías (más rápido)
+    "types": [
+      "node"
+    ], // Carga los tipos de Node.js
+    "sourceMap": true // Útil para debugging (opcional)
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
