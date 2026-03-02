@@ -65,7 +65,7 @@ const RegistroUsuario: React.FC = () => {
     if (!validarFormulario()) return;
 
     try {
-      const response = await fetch("http://localhost:4001/client", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/client`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

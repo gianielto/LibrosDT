@@ -36,7 +36,7 @@ const CardBook: React.FC<CardBookProps> = ({
   };
 
   const handleAdd = async () => {
-    const response = await fetch("http://localhost:4001/cart/add", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/cart/add`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

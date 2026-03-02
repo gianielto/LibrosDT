@@ -16,7 +16,9 @@ export default function ProductoDetalle() {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const res = await fetch(`http://localhost:4001/Product/${codigo}`);
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/Product/${codigo}`,
+        );
         const data = await res.json();
         setBook(data);
       } catch (error) {

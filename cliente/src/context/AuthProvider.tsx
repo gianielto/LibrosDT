@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const checkSession = async () => {
     try {
-      const response = await fetch("http://localhost:4001/auth/me", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/me`, {
         credentials: "include",
       });
 
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = async () => {
-    await fetch("http://localhost:4001/auth/logout", {
+    await fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
       method: "POST",
       credentials: "include",
     });

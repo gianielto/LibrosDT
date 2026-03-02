@@ -6,13 +6,13 @@ const Baner: React.FC = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await fetch("http://localhost:4001/Promociones");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/Promociones`);
         const data = await res.json();
         const randomFive = data.sort(() => Math.random() - 0.4).slice(0, 4);
 
         const bannerUrls = randomFive.map(
           (promocion: { archivo: string }) =>
-            `../../../imagenes/promociones/archivos/${promocion.archivo}`
+            `../../../imagenes/promociones/archivos/${promocion.archivo}`,
         );
         setBanners(bannerUrls);
       } catch (error) {

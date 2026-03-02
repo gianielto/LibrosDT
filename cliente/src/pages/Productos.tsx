@@ -19,7 +19,7 @@ export default function Productos({ numberOfProducts }: ProductosProps) {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await fetch("http://localhost:4001/Product");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/Product`);
         const data = await res.json();
         if (numberOfProducts) {
           const randomFive = data

@@ -18,7 +18,7 @@ const Carrito = () => {
   const [items, setItems] = useState<Item[]>([]);
 
   const fetchCart = async () => {
-    const res = await fetch("http://localhost:4001/cart", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
       credentials: "include",
     });
     const data = await res.json();
@@ -33,7 +33,7 @@ const Carrito = () => {
   }, []);
   useEffect(() => {}, [items]);
   // const handleRemove = async (productoId: number) => {
-  //   await fetch(`http://localhost:4001/cart/remove/${productoId}`, {
+  //   await fetch(`${import.meta.env.VITE_API_URL}/cart/remove/${productoId}`, {
   //     method: "DELETE",
   //     credentials: "include",
   //   });
@@ -42,7 +42,7 @@ const Carrito = () => {
   // };
   const handleRemove = async (productoId: number) => {
     console.log("Producto ID a eliminar:", productoId);
-    await fetch(`http://localhost:4001/cart/remove/${productoId}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/cart/remove/${productoId}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -52,7 +52,7 @@ const Carrito = () => {
     );
   };
   // const handleUpdate = async (productoId: number, cantidad: number) => {
-  //   await fetch("http://localhost:4001/cart/add", {
+  //   await fetch(`${import.meta.env.VITE_API_URL}/cart/add`, {
   //     method: "POST",
   //     headers: { "Content-Type": "application/json" },
   //     credentials: "include",
@@ -62,7 +62,7 @@ const Carrito = () => {
   //   fetchCart();
   // };
   const handleUpdate = async (productoId: number, cantidad: number) => {
-    await fetch("http://localhost:4001/cart/add", {
+    await fetch(`${import.meta.env.VITE_API_URL}/cart/add`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
