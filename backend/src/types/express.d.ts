@@ -1,7 +1,8 @@
-import "express";
-declare module "express" {
-  export interface Request {
-    client: {
+import "express-serve-static-core";
+
+declare module "express-serve-static-core" {
+  interface Request {
+    client?: {
       id: number;
       correo: string;
       nombre: string;

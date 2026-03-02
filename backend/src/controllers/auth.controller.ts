@@ -33,7 +33,11 @@ const login = async (req: Request, res: Response) => {
   return res.json({ message: "Login exitoso" });
 };
 const getME = (req: Request, res: Response) => {
-  res.json({
+  if (!req.client) {
+    return res.status(401).json({ message: "No autorizado" });
+  }
+
+  return res.json({
     id: req.client.id,
     correo: req.client.correo,
     nombre: req.client.nombre,

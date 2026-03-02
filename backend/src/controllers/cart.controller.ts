@@ -81,6 +81,10 @@ export const addToCart = async (
   res: Response,
   next: NextFunction,
 ) => {
+  if (!req.client) {
+    return res.status(401).json({ message: "No autorizado" });
+  }
+
   const clienteId = req.client.id;
   const { productoId, cantidad } = req.body;
 
@@ -119,7 +123,8 @@ export const addToCart = async (
 
   if (existingItem) {
     const nuevaCantidad = existingItem.cantidad + cantidad;
-    if (nuevaCantidad > producto.stock) {
+    const stockDisponible = producto.stock ?? 0;
+    if (nuevaCantidad > stockDisponible) {
       return res
         .status(400)
         .json({ message: "Cantidad excede el stock disponible" });
