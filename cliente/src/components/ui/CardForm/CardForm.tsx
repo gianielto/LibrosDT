@@ -1,4 +1,4 @@
-import "./cardForm.css";
+import "./CardForm.css";
 
 interface CardFormProps {
   title: string;
