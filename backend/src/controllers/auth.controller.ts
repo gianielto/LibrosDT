@@ -17,7 +17,9 @@ const login = async (req: Request, res: Response) => {
     return res.status(401).json({ message: "Credenciales incorrectas1" });
   }
 
-  if (!bcrypt.compare(pass, client.pass)) {
+  const validPassword = await bcrypt.compare(pass, client.pass);
+
+  if (!validPassword) {
     return res.status(401).json({ message: "Credenciales incorrectas2" });
   }
   const token = jwt.sign({ clientId: client.id }, process.env.JWT_SECRET!, {
@@ -26,10 +28,9 @@ const login = async (req: Request, res: Response) => {
 
   res.cookie("token", token, {
     httpOnly: true,
-    sameSite: "lax",
-    secure: false,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production",
   });
-
   return res.json({ message: "Login exitoso" });
 };
 const getME = (req: Request, res: Response) => {
@@ -46,8 +47,8 @@ const getME = (req: Request, res: Response) => {
 const logout = (req: Request, res: Response) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false, // true si usas https en producción
-    sameSite: "lax",
+    secure: true,
+    sameSite: "none",
   });
 
   return res.json({ message: "Logout exitoso" });
