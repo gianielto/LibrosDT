@@ -43,7 +43,7 @@ export default function Productos({ numberOfProducts }: ProductosProps) {
           key={book.id}
           id={book.id}
           title={book.nombre}
-          img={`../../../imagenes/productos/${book.archivo}`}
+          img={`/imagenes/productos/${book.archivo}`}
           precio={`${book.costo}`}
           codigo={book.codigo}
           stock={book.stock}

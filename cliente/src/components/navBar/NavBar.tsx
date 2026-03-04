@@ -95,7 +95,7 @@ const NavBar = () => {
       <div className="izquierda logo-bar">
         <div
           className="logo claro"
-          style={{ backgroundImage: "url('imagenes/logoCliente.jpeg')" }}
+          style={{ backgroundImage: "url('/imagenes/logoCliente.jpeg')" }}
         ></div>
       </div>
 

@@ -12,7 +12,7 @@ const Baner: React.FC = () => {
 
         const bannerUrls = randomFive.map(
           (promocion: { archivo: string }) =>
-            `../../../imagenes/promociones/archivos/${promocion.archivo}`,
+            `/imagenes/promociones/archivos/${promocion.archivo}`,
         );
         setBanners(bannerUrls);
       } catch (error) {

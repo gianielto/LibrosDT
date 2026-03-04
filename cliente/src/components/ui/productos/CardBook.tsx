@@ -55,7 +55,7 @@ const CardBook: React.FC<CardBookProps> = ({
 
   return (
     <div className="card-book">
-      <Link to={`/producto/${id}`}>
+      <Link to={`imagenes/producto/${id}`}>
         <img src={img} alt={title} className="card-book-image" />
       </Link>
 

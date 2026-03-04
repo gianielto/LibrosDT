@@ -83,7 +83,7 @@ const Carrito = () => {
           id={item.producto.id}
           title={item.producto.nombre}
           codigo={item.producto.codigo}
-          imagen={`../../../imagenes/productos/${item.producto.imagen}`}
+          imagen={`/imagenes/productos/${item.producto.imagen}`}
           precio={item.producto.precio}
           cantidadInicial={item.cantidad}
           stock={item.producto.stock}
