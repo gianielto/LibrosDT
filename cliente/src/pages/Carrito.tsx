@@ -32,14 +32,7 @@ const Carrito = () => {
     fetchCart();
   }, []);
   useEffect(() => {}, [items]);
-  // const handleRemove = async (productoId: number) => {
-  //   await fetch(`${import.meta.env.VITE_API_URL}/cart/remove/${productoId}`, {
-  //     method: "DELETE",
-  //     credentials: "include",
-  //   });
 
-  //   fetchCart();
-  // };
   const handleRemove = async (productoId: number) => {
     console.log("Producto ID a eliminar:", productoId);
     await fetch(`${import.meta.env.VITE_API_URL}/cart/remove/${productoId}`, {
@@ -51,6 +44,7 @@ const Carrito = () => {
       prevItems.filter((item) => item.producto.id !== productoId),
     );
   };
+
   // const handleUpdate = async (productoId: number, cantidad: number) => {
   //   await fetch(`${import.meta.env.VITE_API_URL}/cart/add`, {
   //     method: "POST",
@@ -58,12 +52,9 @@ const Carrito = () => {
   //     credentials: "include",
   //     body: JSON.stringify({ productoId, cantidad }),
   //   });
-
-  //   fetchCart();
-  // };
   const handleUpdate = async (productoId: number, cantidad: number) => {
-    await fetch(`${import.meta.env.VITE_API_URL}/cart/add`, {
-      method: "POST",
+    await fetch(`${import.meta.env.VITE_API_URL}/cart/update`, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({ productoId, cantidad }),
