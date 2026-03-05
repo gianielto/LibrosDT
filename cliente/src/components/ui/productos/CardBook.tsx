@@ -3,7 +3,7 @@ import "./CardBook.css";
 import { useState } from "react";
 import MensajeError from "../mensajeError/mensajeError";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "../../../context/useAuth";
 interface CardBookProps {
   id: number;
   title: string;
@@ -24,6 +24,7 @@ const CardBook: React.FC<CardBookProps> = ({
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState("");
   const MAX_STOCK = stock || 10;
+  const { user } = useAuth();
 
   const handleChange = (signo: string) => {
     const value = signo === "-" ? -1 : 1;
@@ -55,7 +56,7 @@ const CardBook: React.FC<CardBookProps> = ({
 
   return (
     <div className="card-book">
-      <Link to={`imagenes/producto/${id}`}>
+      <Link to={`/producto/${id}`} className="card-book-link">
         <img src={img} alt={title} className="card-book-image" />
       </Link>
 
@@ -65,6 +66,33 @@ const CardBook: React.FC<CardBookProps> = ({
         <p className="card-book-code">codigo: {codigo}</p>
       </div>
 
+      {user && (
+        <>
+          <div className="card-book-counter">
+            <Btn1 onClick={() => handleChange("-")}>-</Btn1>
+
+            <input
+              type="number"
+              value={quantity}
+              min={1}
+              onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
+            />
+            <Btn1 onClick={() => handleChange("+")}>+</Btn1>
+          </div>
+          <Btn1 className="card-book-add" onClick={handleAdd}>
+            añadir al carrito
+          </Btn1>
+        </>
+      )}
+
+      <MensajeError mensaje={error} onClose={() => setError("")} />
+    </div>
+  );
+};
+
+export default CardBook;
+{
+  /* 
       <div className="card-book-counter">
         <Btn1 onClick={() => handleChange("-")}>-</Btn1>
 
@@ -82,6 +110,7 @@ const CardBook: React.FC<CardBookProps> = ({
       </Btn1>
     </div>
   );
-};
+}; */
+}
 
-export default CardBook;
+// export default CardBook;
