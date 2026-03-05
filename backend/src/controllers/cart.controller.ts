@@ -2,30 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
 import { parse } from "path";
 
-// export const getCart = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction,
-// ) => {
-//   if (!req.client) {
-//     return res.status(401).json({ message: "No autorizado" });
-//   }
-
-//   const clienteId = req.client.id;
-
-//   const carrito = await prisma.pedidos.findUnique({
-//     where: { id_cliente_status: { id_cliente: clienteId, status: 0 } },
-//     include: {
-//       pedidos_productos: {
-//         include: {
-//           productos: true,
-//         },
-//       },
-//     },
-//   });
-
-//   res.json(carrito);
-// };
 export const getCart = async (
   req: Request,
   res: Response,
@@ -183,8 +159,54 @@ export const removeFromCart = async (
   res.json({ message: "Producto eliminado del carrito" });
   console.log("Producto eliminado del carrito");
 };
-// module.exports = {
-//   getCart,
-//   addToCart,
-//   removeFromCart,
-// };
+export const updateCartItem = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (!req.client) {
+    return res.status(401).json({ message: "No autorizado" });
+  }
+
+  const clienteId = req.client.id;
+  const { productoId, cantidad } = req.body;
+
+  const carrito = await prisma.pedidos.findFirst({
+    where: {
+      id_cliente: clienteId,
+      status: 0,
+    },
+  });
+
+  if (!carrito) {
+    return res.status(404).json({ message: "Carrito no encontrado" });
+  }
+
+  const producto = await prisma.productos.findUnique({
+    where: { id: productoId },
+  });
+
+  if (!producto) {
+    return res.status(404).json({ message: "Producto no encontrado" });
+  }
+  if (!producto.stock) {
+    return res.status(400).json({ message: "Producto sin stock disponible" });
+  }
+  if (cantidad > producto.stock) {
+    return res
+      .status(400)
+      .json({ message: "Cantidad excede el stock disponible" });
+  }
+
+  await prisma.pedidos_productos.updateMany({
+    where: {
+      id_pedido: carrito.id,
+      id_producto: productoId,
+    },
+    data: {
+      cantidad,
+    },
+  });
+
+  res.json({ message: "Cantidad actualizada" });
+};
