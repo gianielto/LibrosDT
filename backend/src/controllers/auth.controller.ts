@@ -47,8 +47,8 @@ const getME = (req: Request, res: Response) => {
 const logout = (req: Request, res: Response) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production",
   });
 
   return res.json({ message: "Logout exitoso" });
