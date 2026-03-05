@@ -70,7 +70,7 @@ export default function ProductoDetalle() {
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
-        setError("Error al añadir al carrito: " + error.message);
+        setError("Error al añadir al carrito " + error.message);
       } else {
         console.log("Error desconocido", error);
         setError("Error al añadir al carrito: " + error);
