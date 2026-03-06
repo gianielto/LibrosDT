@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CartItem from "../components/carrito/CartItem";
+import CartTotal from "../components/carrito/CartTotal";
 
 interface Item {
   id: number;
@@ -82,6 +83,12 @@ const Carrito = () => {
           onUpdate={handleUpdate}
         />
       ))}
+      <CartTotal
+        total={items.reduce(
+          (acc, item) => acc + item.producto.precio * item.cantidad,
+          0,
+        )}
+      />
     </div>
   );
 };
