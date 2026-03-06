@@ -1,3 +1,4 @@
+import Btn1 from "../ui/Button/Btn1";
 import "./CartTotal.css";
 interface CartTotalProps {
   total: number;
@@ -11,9 +12,9 @@ const CartTotal: React.FC<CartTotalProps> = ({ total, onBuy }) => {
 
       <h1>$ {total.toFixed(2)}</h1>
 
-      <button className="buy-btn" onClick={onBuy}>
+      <Btn1 className="buy-btn" onClick={onBuy}>
         comprar
-      </button>
+      </Btn1>
     </div>
   );
 };
