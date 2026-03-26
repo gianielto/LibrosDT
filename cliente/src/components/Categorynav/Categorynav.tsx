@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./CategoryNav.css";
+import { useNavigate } from "react-router-dom";
 
 type Category = {
   id: string;
@@ -9,7 +10,7 @@ type Category = {
 
 const categories: Category[] = [
   {
-    id: "mas-vendidos",
+    id: "MasVendidos",
     label: "Más Vendidos",
     icon: (
       <svg
@@ -207,10 +208,14 @@ const categories: Category[] = [
     ),
   },
 ];
-
+//
 export default function CategoryNav() {
   const [active, setActive] = useState("mas-vendidos");
-
+  const navigate = useNavigate();
+  const handleClick = (catId: string) => {
+    setActive(catId);
+    navigate(`/${catId}`);
+  };
   return (
     <nav className="cat-nav" aria-label="Categorías">
       <ul className="cat-list" role="list">
@@ -218,7 +223,7 @@ export default function CategoryNav() {
           <li key={cat.id}>
             <button
               className={`cat-item${active === cat.id ? " cat-item--active" : ""}`}
-              onClick={() => setActive(cat.id)}
+              onClick={() => handleClick(cat.id)}
               aria-pressed={active === cat.id}
             >
               <span className="cat-icon-wrap">{cat.icon}</span>

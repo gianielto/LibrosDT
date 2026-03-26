@@ -79,6 +79,8 @@ import BarraInfo from "./components/BarraInfo/BarraInfo.tsx";
 import { AuthProvider } from "./context/AuthProvider.tsx";
 import PublicRoute from "./routes/PublicRoute.tsx";
 import ProtectedRoute from "./routes/ProtectedRoute.tsx";
+import MasVendidos from "./pages/productos/MasVendidos.tsx";
+import Novedades from "./pages/productos/novedades.tsx";
 
 function App() {
   return (
@@ -99,6 +101,8 @@ function App() {
 
               <Route path="/home" element={<Home />} />
               <Route path="/productos" element={<Productos />} />
+              <Route path="/MasVendidos" element={<MasVendidos />} />
+              <Route path="/Novedades" element={<Novedades />} />
               <Route
                 path="/login"
                 element={

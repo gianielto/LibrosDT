@@ -33,16 +33,18 @@
   width: 100%;
   padding: 20px 0 8px;
   border-bottom: 1px solid var(--cat-border);
+  background-color: #f8ecdf;
 }
 
 /* ── Horizontal list ─────────────────────────────────────── */
 .cat-list {
   display: flex;
-  gap: 4px;
+  /* gap: 4px; */
+  justify-content: space-between;
   list-style: none;
   margin: 0;
   padding: 0 12px;
-  overflow-x: auto;
+  /* overflow-x: auto; */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
