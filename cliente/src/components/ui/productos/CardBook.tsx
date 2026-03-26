@@ -64,6 +64,9 @@ const CardBook: React.FC<CardBookProps> = ({
         <h3 className="card-book-title">{title}</h3>
         <p className="card-book-price">$ {precio}</p>
         <p className="card-book-code">codigo: {codigo}</p>
+        {stock !== undefined && stock !== null && (
+          <p className="card-book-stock">stock: {stock}</p>
+        )}
       </div>
 
       {user && (
