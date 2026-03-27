@@ -114,7 +114,11 @@
   color: #5a4636;
   font-weight: bold;
 }
-
+.card-book-stock {
+  font-size: 1.1rem;
+  color: #5a4636;
+  font-weight: bold;
+}
 .card-book-code {
   font-size: 0.9rem;
   color: #8b6f5c;
