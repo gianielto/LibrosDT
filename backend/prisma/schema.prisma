@@ -3,8 +3,17 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+ provider          = "postgresql"
+  url               = env("DATABASE_URL")
+ 
+}
+
+model categorias {
+  id        Int         @id @default(autoincrement())
+  nombre    String      @db.VarChar(128)
+  slug      String      @unique @db.VarChar(128)
+  eliminado Int?        @default(0)
+  productos productos[]
 }
 
 model clientes {
@@ -36,7 +45,8 @@ model pedidos {
   id_cliente        Int
   status            Int?                @default(0)
   pedidos_productos pedidos_productos[]
-   @@unique([id_cliente, status])
+
+  @@unique([id_cliente, status])
 }
 
 model pedidos_productos {
@@ -48,28 +58,47 @@ model pedidos_productos {
   pedidos     pedidos   @relation(fields: [id_pedido], references: [id], onUpdate: Restrict, map: "pedidos_productos_ibfk_1")
   productos   productos @relation(fields: [id_producto], references: [id], onUpdate: Restrict, map: "pedidos_productos_ibfk_2")
 
+  @@unique([id_pedido, id_producto])
   @@index([id_pedido], map: "idx_id_pedido")
   @@index([id_producto], map: "idx_id_producto")
-  @@unique([id_pedido, id_producto])
 }
 
 model productos {
-  id                Int                 @id(map: "pk_productos") @default(autoincrement())
-  nombre            String?             @db.VarChar(128)
-  codigo            String?             @db.VarChar(32)
-  descripcion       String?
-  costo             Float?
-  stock             Int?
-  archivo_n         String?             @db.VarChar(255)
-  archivo           String?             @db.VarChar(128)
-  eliminado         Int?                @default(0) @db.SmallInt
+  id          Int     @id(map: "pk_productos") @default(autoincrement())
+  nombre      String? @db.VarChar(128)
+  codigo      String? @db.VarChar(32)
+  descripcion String?
+  costo       Float?
+  stock       Int?
+
+  // Campos viejos — se mantienen opcionales por ahora, se eliminan en fase 2
+  archivo_n String? @db.VarChar(255)
+  archivo   String? @db.VarChar(128)
+
+  // Campos nuevos para Cloudinary
+  cloudinary_id String? @db.VarChar(255)
+  archivo_url   String? @db.VarChar(512)
+
+  // Campos nuevos de categoría y fecha
+  id_categoria  Int?
+  fecha_ingreso DateTime? @default(now())
+
+  eliminado Int? @default(0) @db.SmallInt
+
+  categoria         categorias?         @relation(fields: [id_categoria], references: [id])
   pedidos_productos pedidos_productos[]
 }
 
 model promociones {
-  id        Int     @id(map: "pk_promociones") @default(autoincrement())
-  nombre    String  @db.VarChar(128)
-  archivo   String? @db.VarChar(64)
-  status    Int?    @default(1)
-  eliminado Int?    @default(0)
+  id     Int    @id(map: "pk_promociones") @default(autoincrement())
+  nombre String @db.VarChar(128)
+
+  // Campo viejo — se mantiene opcional por ahora
+  archivo String? @db.VarChar(64)
+
+  // Campo nuevo para Cloudinary
+  archivo_url String? @db.VarChar(512)
+
+  status    Int? @default(1)
+  eliminado Int? @default(0)
 }
