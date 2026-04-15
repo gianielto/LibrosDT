@@ -5,6 +5,8 @@ generator client {
 datasource db {
  provider          = "postgresql"
   url               = env("DATABASE_URL")
+   directUrl = env("DIRECT_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
  
 }
 
@@ -32,7 +34,7 @@ model empleados {
   nombre         String? @db.VarChar(128)
   apellidos      String? @db.VarChar(128)
   correo         String? @db.VarChar(128)
-  pass           String? @db.VarChar(32)
+  pass           String? @db.VarChar(255)
   rol            Int?
   archivo_nombre String? @db.VarChar(255)
   archivo_file   String? @db.VarChar(128)
