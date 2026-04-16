@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import prisma from "../lib/prisma";
+import prisma from "../../lib/prisma";
 import bcrypt from "bcrypt";
 
 export const adminLogin = async (req: Request, res: Response) => {

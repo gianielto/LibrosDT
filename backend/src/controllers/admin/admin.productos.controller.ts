@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import prisma from "../lib/prisma";
-import cloudinary from "../lib/cloudinary";
+import prisma from "../../lib/prisma";
+import cloudinary from "../../lib/cloudinary";
 
 // ─── Listar todos los productos (con categoría) ───────────────────────────────
 export const adminGetProductos = async (
@@ -91,11 +91,9 @@ export const adminCrearProducto = async (
       req.body;
 
     if (!nombre || !codigo || !costo || !stock) {
-      return res
-        .status(400)
-        .json({
-          message: "Faltan campos requeridos: nombre, codigo, costo, stock",
-        });
+      return res.status(400).json({
+        message: "Faltan campos requeridos: nombre, codigo, costo, stock",
+      });
     }
 
     let cloudinary_id: string | undefined;
