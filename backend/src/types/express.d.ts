@@ -7,5 +7,11 @@ declare module "express-serve-static-core" {
       correo: string;
       nombre: string;
     };
+    empleado?: {
+      id: number;
+      correo: string;
+      nombre: string;
+      rol: number;
+    };
   }
 }
