@@ -1,5 +1,5 @@
 import Baner from "../components/Baner/Baner";
-import CategoryNav from "../components/CategoryNav/CategoryNav";
+import CategoryNav from "../components/Categorynav/CategoryNav";
 import Productos from "./Productos";
 
 export default function Home() {
