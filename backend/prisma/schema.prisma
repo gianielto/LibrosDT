@@ -27,6 +27,7 @@ model clientes {
   telefono  String? @db.VarChar(15)
   direccion String?
   eliminado Int?    @default(0)
+  pedidos   pedidos[]
 }
 
 model empleados {
@@ -42,13 +43,17 @@ model empleados {
 }
 
 model pedidos {
-  id                Int                 @id(map: "pk_pedidos") @default(autoincrement())
-  fecha             DateTime            @db.Date
-  id_cliente        Int
-  status            Int?                @default(0)
+ id         Int      @id @default(autoincrement())
+  fecha      DateTime @db.Date
+  id_cliente Int
+  status     Int?     @default(0)
+
+  cliente clientes @relation(fields: [id_cliente], references: [id])
+
   pedidos_productos pedidos_productos[]
 
   @@unique([id_cliente, status])
+ 
 }
 
 model pedidos_productos {
