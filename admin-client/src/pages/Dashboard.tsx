@@ -3,7 +3,7 @@ import api from "../api/axios";
 import type { DashboardData } from "../types/index";
 // import { DashboardData } from "../types/index";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge/badge";
 
 const STATUS_COLORS: Record<number, string> = {
   1: "bg-yellow-100 text-yellow-800",
