@@ -18,7 +18,7 @@ import { AuthProvider } from "./context/AuthProvider.tsx";
 import PublicRoute from "./routes/PublicRoute.tsx";
 import ProtectedRoute from "./routes/ProtectedRoute.tsx";
 import MasVendidos from "./pages/productos/MasVendidos";
-import Novedades from "./pages/productos/Novedades";
+import Novedades from "./pages/productos/Novedades.tsx";
 
 function App() {
   return (
