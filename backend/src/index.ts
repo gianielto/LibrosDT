@@ -76,6 +76,7 @@ app.use(
       "http://localhost:5173",
       "http://localhost:5174",
       "https://librosdt.vercel.app",
+      "http://localhost:4173",
     ],
     credentials: true,
   }),
