@@ -55,8 +55,15 @@ export const adminLogin = async (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    return res.status(500).json({ message: "Error interno del servidor" });
+    console.error(error); // 👈 ESTO ES CLAVE
+    return res.status(500).json({
+      message: "Error interno del servidor",
+      error: error instanceof Error ? error.message : error,
+    });
   }
+  // catch (error) {
+  //   return res.status(500).json({ message: "Error interno del servidor1" });
+  // }
 };
 
 export const adminMe = (req: Request, res: Response) => {

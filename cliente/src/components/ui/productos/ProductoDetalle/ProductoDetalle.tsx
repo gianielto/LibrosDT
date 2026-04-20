@@ -12,6 +12,7 @@ interface Book {
   stock: number;
   descripcion: string;
   id: number;
+  archivo_url?: string;
 }
 
 export default function ProductoDetalle() {
@@ -81,7 +82,10 @@ export default function ProductoDetalle() {
   return (
     <div className="detalle-container">
       <div className="detalle-imagen">
-        <img src={`/imagenes/productos/${book.archivo}`} alt={book.nombre} />
+        <img
+          src={book.archivo_url || `/imagenes/productos/${book.archivo}`}
+          alt={book.nombre}
+        />
       </div>
 
       <div className="detalle-info">

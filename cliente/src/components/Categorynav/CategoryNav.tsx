@@ -57,7 +57,7 @@ const categories: Category[] = [
     ),
   },
   {
-    id: "novedades",
+    id: "Novedades",
     label: "Novedades",
     icon: (
       <svg
@@ -210,7 +210,7 @@ const categories: Category[] = [
 ];
 //
 export default function CategoryNav() {
-  const [active, setActive] = useState("mas-vendidos");
+  const [active, setActive] = useState("MasVendidos");
   const navigate = useNavigate();
   const handleClick = (catId: string) => {
     setActive(catId);
