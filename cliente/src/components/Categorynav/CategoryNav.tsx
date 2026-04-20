@@ -57,7 +57,7 @@ const categories: Category[] = [
     ),
   },
   {
-    id: "novedades",
+    id: "Novedades",
     label: "Novedades",
     icon: (
       <svg
