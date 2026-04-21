@@ -61,6 +61,7 @@ const ClientesRoutes = require("./routes/clientes.routes");
 const ProductsRoutes = require("./routes/productos.routes");
 const EmpleadosRoutes = require("./routes/empleados.routes");
 const PromocionesRoutes = require("./routes/Promociones.routes");
+import PushRoutes from "./routes/push.Routes";
 import cartRoutes from "./routes/cart.routes";
 import auth from "./routes/auth.routes";
 import dotenv from "dotenv";
@@ -90,6 +91,8 @@ app.use(ClientesRoutes);
 app.use(ProductsRoutes);
 app.use(EmpleadosRoutes);
 app.use(PromocionesRoutes);
+
+app.use("/push", PushRoutes);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   return res.json({
