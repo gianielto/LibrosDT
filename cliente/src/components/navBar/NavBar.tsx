@@ -4,6 +4,7 @@ import { useAuth } from "../../context/useAuth";
 import Btn1 from "../ui/Button/Btn1";
 import OfflineBanner from "../ui/OfflineBanner/OfflineBanner"; // ← import
 // import usePushNotifications from "../../hooks/usePushNotifications";
+import BellButton from "../ui/BellButton/BellButton"; // ← import
 
 const NavBar = () => {
   const { user, logout, loading } = useAuth();
@@ -31,6 +32,12 @@ const NavBar = () => {
               <p>Hola, {user.nombre}</p>
             </li>
           )}
+          {user && (
+            <li>
+              <BellButton />
+            </li>
+          )}
+
           <li>
             <ButtonLink to="/home">Home</ButtonLink>
           </li>
