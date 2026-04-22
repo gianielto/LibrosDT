@@ -1,6 +1,7 @@
-.card-book {
+/* CardBook.css */
+/* .card-book {
   width: 100%;
-  max-width: 240px; /* Tamaño máximo */
+  max-width: 240px; 
   background: #f8ecdf;
   padding: 20px;
   border-radius: 20px;
@@ -17,7 +18,6 @@
   transform: translateY(-4px);
 }
 
-/* Imagen responsiva */
 .card-book-image {
   width: 100%;
   max-width: 150px;
@@ -26,7 +26,6 @@
   border-radius: 10px;
 }
 
-/* Texto */
 .card-book-title {
   font-size: 1rem;
   font-weight: 600;
@@ -48,7 +47,6 @@
   color: #8b6f5c;
 }
 
-/* Contador */
 .card-book-counter {
   display: flex;
   align-items: center;
@@ -66,7 +64,6 @@
   font-size: 1rem;
 }
 
-/* Botón “añadir al carrito” */
 .card-book-add {
   width: 100% !important;
   padding: 12px !important;
@@ -81,11 +78,7 @@
   background: #6e5643 !important;
 }
 
-/* -------------------------------------
-     📱 RESPONSIVE BREAKPOINTS
--------------------------------------- */
 
-/* Tablets (≤ 1024px) */
 @media (max-width: 1024px) {
   .card-book {
     max-width: 220px;
@@ -96,10 +89,9 @@
   }
 }
 
-/* Tablets pequeñas y móviles horizontales (≤ 768px) */
 @media (max-width: 768px) {
   .card-book {
-    max-width: 48%; /* 2 tarjetas por fila */
+    max-width: 48%;
   }
   .card-book-title {
     font-size: 0.95rem;
@@ -109,10 +101,9 @@
   }
 }
 
-/* Móviles (≤ 480px) */
 @media (max-width: 480px) {
   .card-book {
-    max-width: 100%; /* 1 tarjeta por fila */
+    max-width: 100%; 
     padding: 15px;
   }
   .card-book-image {
@@ -129,5 +120,118 @@
     padding: 10px !important;
   }
 }
+ */
+/* CardBook.css */
+.card-book {
+  width: 100%;
+  height: 100%; /* 👈 para igualar alturas */
+  background: #f8ecdf;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 
-/* grid  */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 👈 distribuye mejor contenido */
+  text-align: center;
+  gap: 12px;
+
+  transition: transform 0.2s ease;
+}
+
+.card-book:hover {
+  transform: translateY(-4px);
+}
+
+/* Imagen */
+.card-book-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Texto */
+.card-book-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4b3b2f;
+}
+
+.card-book-price {
+  font-size: 1.1rem;
+  color: #5a4636;
+  font-weight: bold;
+}
+
+.card-book-stock {
+  font-size: 0.95rem;
+  color: #5a4636;
+}
+
+.card-book-code {
+  font-size: 0.85rem;
+  color: #8b6f5c;
+}
+
+/* Contador */
+.card-book-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card-book-counter input {
+  width: 40px;
+  height: 35px;
+  text-align: center;
+  border: 1px solid #bca28b;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Botón */
+.card-book-add {
+  width: 100%;
+  padding: 14px;
+  background: #5a4636;
+  color: white;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.card-book-add:hover {
+  background: #6e5643;
+}
+
+/* 📱 Ajustes finos para móvil */
+@media (max-width: 480px) {
+  .card-book {
+    padding: 14px;
+  }
+
+  .card-book-image {
+    height: 160px;
+  }
+
+  .card-book-title {
+    font-size: 0.9rem;
+  }
+
+  .card-book-price {
+    font-size: 1rem;
+  }
+
+  .card-book-counter input {
+    width: 35px;
+    height: 32px;
+  }
+
+  .card-book-add {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+}

@@ -1,4 +1,5 @@
-.cardbook-grid {
+/* gridBook.css */
+/* .cardbook-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 30px;
@@ -28,4 +29,15 @@
   .cardbook-grid {
     grid-template-columns: repeat(1, 1fr);
   }
+} */
+
+/* gridBook.css */
+.cardbook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
+
+  /* opcional pero PRO */
+  align-items: stretch;
 }

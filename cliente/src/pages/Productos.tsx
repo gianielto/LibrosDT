@@ -1,3 +1,4 @@
+// Productos.tsx
 import CardBook from "../components/ui/productos/CardBook";
 import GridBook from "../components/ui/productos/gridBook";
 import { useEffect, useState } from "react";
