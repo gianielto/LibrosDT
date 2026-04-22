@@ -59,6 +59,8 @@ const usePushNotifications = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   const subscribe = async (userId: number) => {
+    console.log("VAPID:", import.meta.env.VITE_VAPID_PUBLIC_KEY);
+
     if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
       console.warn("Push no soportado");
       return;
