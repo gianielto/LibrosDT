@@ -30,14 +30,43 @@
     grid-template-columns: repeat(1, 1fr);
   }
 } */
+/* cardbook.css  */
 
+/* .cardbook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  justify-items: center;
+} */
 /* gridBook.css */
 .cardbook-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 50px;
+  padding: 16px 20px;
+  /* justify-items: center; */
+}
+@media (min-width: 1400px) {
+  .cardbook-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
 
-  /* opcional pero PRO */
-  align-items: stretch;
+@media (max-width: 1024px) {
+  .cardbook-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cardbook-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .cardbook-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

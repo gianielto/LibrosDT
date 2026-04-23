@@ -1,3 +1,4 @@
+// Home.tsx
 import Baner from "../components/Baner/Baner";
 import CategoryNav from "../components/Categorynav/CategoryNav";
 import Productos from "./Productos";
