@@ -1,3 +1,4 @@
+// Baner.tsx
 import { useEffect, useState } from "react";
 import "./Banner.css";
 

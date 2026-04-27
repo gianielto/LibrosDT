@@ -1,3 +1,4 @@
+// CategoryNav.tsx
 import { useState } from "react";
 import "./CategoryNav.css";
 import { useNavigate } from "react-router-dom";

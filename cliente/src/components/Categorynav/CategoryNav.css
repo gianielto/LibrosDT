@@ -1,20 +1,19 @@
-/* ─── CategoryNav ─────────────────────────────────────── */
+/*CategoryNav */
 
 :root {
-  --cat-primary: #5b3fa0; /* morado principal */
-  --cat-accent: #f5c800; /* amarillo/dorado   */
-  --cat-active-bg: #f0ebff; /* fondo activo      */
+  --cat-primary: #5b3fa0;
+  --cat-accent: #f5c800;
+  --cat-active-bg: #f0ebff;
   --cat-hover-bg: #f7f5ff;
   --cat-text: #1a1a2e;
   --cat-muted: #6b6b80;
   --cat-border: #e0d8f5;
   --cat-bg: #fff;
   --cat-radius: 14px;
-  --cat-size: 72px; /* diámetro del área del ícono */
+  --cat-size: 72px;
   --cat-transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --cat-primary: #9d7de8;
@@ -28,7 +27,6 @@
   }
 }
 
-/* ── Wrapper ────────────────────────────────────────────── */
 .cat-nav {
   width: 100%;
   padding: 20px 0 8px;
@@ -36,23 +34,21 @@
   background-color: #f8ecdf;
 }
 
-/* ── Horizontal list ─────────────────────────────────────── */
 .cat-list {
   display: flex;
-  /* gap: 4px; */
   justify-content: space-between;
   list-style: none;
   margin: 0;
   padding: 0 12px;
-  /* overflow-x: auto; */
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overflow-x: auto;
 }
+
 .cat-list::-webkit-scrollbar {
   display: none;
 }
 
-/* ── Button item ─────────────────────────────────────────── */
 .cat-item {
   display: flex;
   flex-direction: column;
@@ -71,6 +67,7 @@
   white-space: nowrap;
   min-width: 96px;
   position: relative;
+  flex-shrink: 0;
 }
 
 .cat-item:hover {
@@ -83,7 +80,6 @@
   transform: translateY(0);
 }
 
-/* ── Active state ─────────────────────────────────────────── */
 .cat-item--active {
   background: var(--cat-active-bg);
   color: var(--cat-primary);
@@ -92,7 +88,7 @@
 .cat-item--active::after {
   content: "";
   position: absolute;
-  bottom: -1px; /* se superpone al borde del nav */
+  bottom: -1px;
   left: 20%;
   right: 20%;
   height: 3px;
@@ -100,7 +96,6 @@
   background: var(--cat-primary);
 }
 
-/* ── Icon wrapper ─────────────────────────────────────────── */
 .cat-icon-wrap {
   display: flex;
   align-items: center;
@@ -123,7 +118,6 @@
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--cat-primary) 10%, transparent);
 }
 
-/* ── SVG icon ─────────────────────────────────────────────── */
 .cat-icon {
   width: 36px;
   height: 36px;
@@ -135,7 +129,6 @@
   transform: scale(1.1);
 }
 
-/* ── Label ────────────────────────────────────────────────── */
 .cat-label {
   font-size: 12px;
   font-weight: 600;
@@ -145,20 +138,49 @@
   transition: color var(--cat-transition);
 }
 
-/* ── Responsive ───────────────────────────────────────────── */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .cat-nav {
+    padding: 14px 0 6px;
+  }
+
+  .cat-list {
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 0 8px;
+  }
+
   .cat-item {
     min-width: 80px;
-    padding: 12px 14px 10px;
+    padding: 10px 12px 8px;
+    gap: 8px;
   }
+
   .cat-icon-wrap {
     --cat-size: 58px;
   }
+
   .cat-icon {
     width: 28px;
     height: 28px;
   }
+
   .cat-label {
     font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cat-item {
+    min-width: 72px;
+    padding: 8px 10px;
+  }
+
+  .cat-icon-wrap {
+    --cat-size: 52px;
+  }
+
+  .cat-icon {
+    width: 24px;
+    height: 24px;
   }
 }

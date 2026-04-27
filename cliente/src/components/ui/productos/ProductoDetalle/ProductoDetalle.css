@@ -1,3 +1,5 @@
+/* ProductoDetalle */
+
 .detalle-container {
   display: flex;
   gap: 40px;
@@ -7,27 +9,129 @@
   width: 90%;
   margin: 30px auto;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.detalle-imagen {
+  flex-shrink: 0;
 }
 
 .detalle-imagen img {
-  width: 350px;
+  width: 300px;
+  height: auto;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: block;
 }
 
 .detalle-info {
   flex: 1;
+  min-width: 0;
   font-size: 1.4rem;
   color: #402e32;
 }
 
 .detalle-info h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 20px;
   font-weight: bold;
+  line-height: 1.2;
+}
+
+.detalle-info h2 {
+  font-size: 1.3rem;
+  margin: 20px 0 8px;
 }
 
 .detalle-info p {
   margin: 10px 0;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.card-book-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 12px;
+}
+
+.card-book-counter input {
+  width: 50px;
+  text-align: center;
+  padding: 6px;
+  border: 1px solid #bca28b;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.card-book-add {
+  width: 100% !important;
+  padding: 12px !important;
+  background: #5a4636 !important;
+  color: white !important;
+  border-radius: 12px !important;
+  text-transform: lowercase;
+  font-size: 1rem;
+}
+
+.card-book-add:hover {
+  background: #6e5643 !important;
+}
+
+/* ── TABLET ── */
+@media (max-width: 768px) {
+  .detalle-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    gap: 24px;
+    width: 94%;
+  }
+
+  .detalle-imagen img {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .detalle-info {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  .detalle-info h1 {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+  }
+
+  .detalle-info p {
+    font-size: 1rem;
+  }
+}
+
+/* ── MÓVIL ── */
+@media (max-width: 480px) {
+  .detalle-container {
+    padding: 16px;
+    width: 96%;
+    margin: 16px auto;
+    border-radius: 14px;
+  }
+
+  .detalle-imagen img {
+    max-width: 260px;
+  }
+
+  .detalle-info h1 {
+    font-size: 1.4rem;
+  }
+
+  .detalle-info p {
+    font-size: 0.95rem;
+  }
+
+  .card-book-add {
+    font-size: 0.9rem;
+    padding: 10px !important;
+  }
 }

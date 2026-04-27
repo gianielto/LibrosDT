@@ -1,3 +1,4 @@
+// CardBook.tsx
 import Btn1 from "../Button/Btn1";
 import "./CardBook.css";
 import { useState } from "react";
@@ -92,28 +93,4 @@ const CardBook: React.FC<CardBookProps> = ({
     </div>
   );
 };
-
 export default CardBook;
-{
-  /* 
-      <div className="card-book-counter">
-        <Btn1 onClick={() => handleChange("-")}>-</Btn1>
-
-        <input
-          type="number"
-          value={quantity}
-          min={1}
-          onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
-        />
-        <Btn1 onClick={() => handleChange("+")}>+</Btn1>
-      </div>
-      <MensajeError mensaje={error} onClose={() => setError("")} />
-      <Btn1 className="card-book-add" onClick={handleAdd}>
-        añadir al carrito
-      </Btn1>
-    </div>
-  );
-}; */
-}
-
-// export default CardBook;
