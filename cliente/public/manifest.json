@@ -1,0 +1,25 @@
+{
+  "id": "/",
+  "name": "LibrosDT",
+  "short_name": "LibrosDT",
+  "description": "Tu tienda de libros favorita",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#524439",
+  "background_color": "#c3a38a",
+  "icons": [
+    {
+      "src": "/imagenes/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/imagenes/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

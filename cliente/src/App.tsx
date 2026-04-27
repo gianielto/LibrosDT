@@ -17,7 +17,8 @@ import BarraInfo from "./components/BarraInfo/BarraInfo.tsx";
 import { AuthProvider } from "./context/AuthProvider.tsx";
 import PublicRoute from "./routes/PublicRoute.tsx";
 import ProtectedRoute from "./routes/ProtectedRoute.tsx";
-import MasVendidos from "./pages/productos/MasVendidos";
+// import MasVendidos from "./pages/productos/mas-vendidos/MasVendidos";
+import MasVendidos from "./pages/productos/mas-vendidos/MasVendidos.tsx";
 import Novedades from "./pages/productos/Novedades.tsx";
 
 function App() {

@@ -28,6 +28,7 @@ model clientes {
   direccion String?
   eliminado Int?    @default(0)
   pedidos   pedidos[]
+  pushSubscriptions PushSubscription[]
 }
 
 model empleados {
@@ -108,4 +109,10 @@ model promociones {
 
   status    Int? @default(1)
   eliminado Int? @default(0)
+}
+model PushSubscription {
+  id           Int    @id @default(autoincrement())
+  userId       Int    
+  subscription String 
+  cliente         clientes   @relation(fields: [userId], references: [id])
 }
