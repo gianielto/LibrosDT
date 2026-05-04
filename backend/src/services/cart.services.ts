@@ -51,6 +51,7 @@ export const getCartItems = async (clienteId: number) => {
       codigo: item.productos.codigo,
       precio: item.productos.costo,
       imagen: item.productos.archivo,
+      imagen_url: item.productos.archivo_url,
       stock: item.productos.stock,
     },
   }));
