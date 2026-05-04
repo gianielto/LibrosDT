@@ -9,7 +9,7 @@ const getAllPromociones = async (
 ) => {
   try {
     const Promociones = await prisma.promociones.findMany({
-      where: { eliminado: 0, status: 1 },
+      where: { eliminado: false, status: 1 },
     });
 
     res.json(Promociones);

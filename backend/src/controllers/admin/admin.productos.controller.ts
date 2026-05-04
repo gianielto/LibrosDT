@@ -70,7 +70,7 @@ export const adminGetProducto = async (
       include: { categoria: true },
     });
 
-    if (!producto || producto.eliminado === 1) {
+    if (!producto || producto.eliminado === true) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
 
@@ -161,7 +161,7 @@ export const adminActualizarProducto = async (
       where: { id },
     });
 
-    if (!productoActual || productoActual.eliminado === 1) {
+    if (!productoActual || productoActual.eliminado === true) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
 
@@ -229,7 +229,7 @@ export const adminEliminarProducto = async (
 
     const producto = await prisma.productos.findUnique({ where: { id } });
 
-    if (!producto || producto.eliminado === 1) {
+    if (!producto || producto.eliminado === true) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
 
@@ -240,7 +240,7 @@ export const adminEliminarProducto = async (
 
     await prisma.productos.update({
       where: { id },
-      data: { eliminado: 1 },
+      data: { eliminado: true },
     });
 
     return res.json({ message: "Producto eliminado correctamente" });
@@ -257,7 +257,7 @@ export const adminGetCategorias = async (
 ) => {
   try {
     const categorias = await prisma.categorias.findMany({
-      where: { eliminado: 0 },
+      where: { eliminado: false },
       orderBy: { nombre: "asc" },
     });
     return res.json(categorias);
@@ -299,7 +299,7 @@ export const adminGetEditoriales = async (
 ) => {
   try {
     const editoriales = await prisma.editoriales.findMany({
-      where: { eliminado: 0 },
+      where: { eliminado: false },
       orderBy: { nombre: "asc" },
     });
     return res.json(editoriales);
