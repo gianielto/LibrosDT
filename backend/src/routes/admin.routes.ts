@@ -87,6 +87,10 @@ router.delete("/productos/:id", adminMiddleware, adminEliminarProducto);
 router.get("/categorias", adminMiddleware, adminGetCategorias);
 router.post("/categorias", adminMiddleware, adminCrearCategoria);
 
+// ── Editoriales ────────────────────────────────────────────────────────────────
+router.get("/editoriales", adminMiddleware, adminGetEditoriales);
+router.post("/editoriales", adminMiddleware, adminCrearEditorial);
+
 // ── Clientes ──────────────────────────────────────────────────────────────────
 router.get("/clientes", adminMiddleware, adminGetClientes);
 router.get("/clientes/:id", adminMiddleware, adminGetCliente);

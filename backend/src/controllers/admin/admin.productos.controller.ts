@@ -290,3 +290,45 @@ export const adminCrearCategoria = async (
     next(error);
   }
 };
+
+// ─── CRUD de Editoriales ───────────────────────────────────────────────────────
+export const adminGetEditoriales = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const editoriales = await prisma.editoriales.findMany({
+      where: { eliminado: 0 },
+      orderBy: { nombre: "asc" },
+    });
+    return res.json(editoriales);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const adminCrearEditorial = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { nombre, slug } = req.body;
+
+    if (!nombre || !slug) {
+      return res.status(400).json({ message: "Nombre y slug son requeridos" });
+    }
+
+    const editorial = await prisma.editoriales.create({
+      data: { nombre, slug },
+    });
+
+    return res.status(201).json(editorial);
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return res.status(400).json({ message: "El slug ya existe" });
+    }
+    next(error);
+  }
+};
