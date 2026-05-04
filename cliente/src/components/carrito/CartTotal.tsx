@@ -1,3 +1,4 @@
+// CartTotal.tsx
 import Btn1 from "../ui/Button/Btn1";
 import "./CartTotal.css";
 interface CartTotalProps {

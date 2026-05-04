@@ -1,0 +1,74 @@
+/* CartItemQuantity.css */
+.cart-quantity {
+  text-align: center;
+  width: 100%;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-quantity h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #5c4635;
+}
+
+.contador {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3eee6;
+  padding: 8px;
+  border-radius: 8px;
+  color: #5c4635;
+}
+
+.contador button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #5c4635;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contador button:active {
+  transform: scale(0.95);
+}
+
+.contador input {
+  width: 45px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  height: 32px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .cart-quantity {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .contador {
+    gap: 8px;
+  }
+
+  .contador button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .contador input {
+    width: 50px;
+  }
+}

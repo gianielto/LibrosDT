@@ -46,13 +46,6 @@ const Carrito = () => {
     );
   };
 
-  // const handleUpdate = async (productoId: number, cantidad: number) => {
-  //   await fetch(`${import.meta.env.VITE_API_URL}/cart/add`, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     credentials: "include",
-  //     body: JSON.stringify({ productoId, cantidad }),
-  //   });
   const handleUpdate = async (productoId: number, cantidad: number) => {
     await fetch(`${import.meta.env.VITE_API_URL}/cart/update`, {
       method: "PUT",
@@ -76,6 +69,11 @@ const Carrito = () => {
           title={item.producto.nombre}
           codigo={item.producto.codigo}
           imagen={`/imagenes/productos/${item.producto.imagen}`}
+          // imagen={
+          //   item.producto.imagen ||
+          //   `/imagenes/productos/${item.producto.imagen}`
+          // }
+          // img={book.archivo_url || `/imagenes/productos/${book.archivo}`}
           precio={item.producto.precio}
           cantidadInicial={item.cantidad}
           stock={item.producto.stock}

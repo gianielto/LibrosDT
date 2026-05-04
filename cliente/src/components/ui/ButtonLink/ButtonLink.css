@@ -1,24 +1,39 @@
-/* ButtonLink */
+/* ButtonLink.css */
 .button-link {
   display: inline-block;
   padding: 0.6rem 1.2rem;
   background-color: #524439;
   color: white;
-  border: solid 2px #402e32;
+  border: solid 2px #524439;
   border-radius: 20px;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
-  transition: background 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   margin: 5px;
+  cursor: pointer;
 }
 
 .button-link:hover {
-  background-color: #ddd; /* Cambia el fondo al pasar el mouse */
-  cursor: pointer; /* Cambia el cursor a una mano al pasar el mouse */
-  color: #402e32;
-  border-color: #6d4c2b;
+  background-color: #6e5643;
+  border-color: #6e5643;
+  transform: translateY(-2px);
 }
+
 .button-link:active {
-  background-color: #bbb; /* Cambia el fondo al hacer clic */
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .button-link {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-link {
+    padding: 0.45rem 0.9rem;
+    font-size: 13px;
+  }
 }

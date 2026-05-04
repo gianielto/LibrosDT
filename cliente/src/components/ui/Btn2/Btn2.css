@@ -1,0 +1,73 @@
+/* BOTÓN BASE */
+button.Btn2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 0.6rem 1.2rem;
+  background-color: #5a7d67;
+  color: #ffffff;
+  border: 2px solid #5a7d67;
+  border-radius: 20px;
+
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 5px;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.Btn2-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Btn2-icon svg {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+button.Btn2:hover {
+  background-color: #4a6a58;
+  border-color: #4a6a58;
+  transform: translateY(-2px);
+}
+
+button.Btn2:active {
+  transform: translateY(0);
+  background-color: #3d5a4a;
+}
+
+button.Btn2:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(90, 125, 103, 0.2);
+}
+
+@media (max-width: 768px) {
+  button.Btn2 {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  button.Btn2 {
+    padding: 8px;
+    font-size: 13px;
+
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+
+    width: 36px;
+    height: 36px;
+  }
+
+  .Btn2-icon {
+    width: 100%;
+    height: 100%;
+  }
+}

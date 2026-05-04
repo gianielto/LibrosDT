@@ -1,20 +1,44 @@
 button.Btn {
   display: inline-block;
   padding: 0.6rem 1.2rem;
-  background-color: #587e77;
+  background-color: #5a7d67;
   color: rgb(251, 251, 251);
-  border: solid 2px #4c8077;
+  border: solid 2px #5a7d67;
   border-radius: 20px;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
-  transition: background 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   margin: 5px;
+  cursor: pointer;
 }
 
 button.Btn:hover {
-  background-color: #ddd;
-  cursor: pointer;
-  color: #402e32;
-  border-color: #6d4c2b;
+  background-color: #4a6a58;
+  border-color: #4a6a58;
+  transform: translateY(-2px);
+}
+
+button.Btn:active {
+  transform: translateY(0);
+  background-color: #3d5a4a;
+}
+
+button.Btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(90, 125, 103, 0.2);
+}
+
+@media (max-width: 768px) {
+  button.Btn {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  button.Btn {
+    padding: 0.45rem 0.9rem;
+    font-size: 13px;
+  }
 }
