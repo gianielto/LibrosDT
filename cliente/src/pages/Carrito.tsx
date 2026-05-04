@@ -11,6 +11,7 @@ interface Item {
     precio: number;
     imagen: string;
     stock: number;
+    imagen_url?: string;
   };
   cantidad: number;
 }
@@ -68,12 +69,11 @@ const Carrito = () => {
           id={item.producto.id}
           title={item.producto.nombre}
           codigo={item.producto.codigo}
-          imagen={`/imagenes/productos/${item.producto.imagen}`}
-          // imagen={
-          //   item.producto.imagen ||
-          //   `/imagenes/productos/${item.producto.imagen}`
-          // }
-          // img={book.archivo_url || `/imagenes/productos/${book.archivo}`}
+          // imagen={`/imagenes/productos/${item.producto.imagen}`}
+          imagen={
+            item.producto.imagen_url ||
+            `/imagenes/productos/${item.producto.imagen}`
+          }
           precio={item.producto.precio}
           cantidadInicial={item.cantidad}
           stock={item.producto.stock}
