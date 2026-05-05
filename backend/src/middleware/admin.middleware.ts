@@ -23,7 +23,7 @@ export const adminMiddleware = async (
       where: { id: decoded.empleadoId },
     });
 
-    if (!empleado || empleado.eliminado === 1) {
+    if (!empleado || empleado.eliminado === true) {
       return res.status(401).json({ message: "Empleado no existe" });
     }
 

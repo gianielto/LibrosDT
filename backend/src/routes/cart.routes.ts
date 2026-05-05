@@ -1,18 +1,3 @@
-// import { Router } from "express";
-// import { authMiddleware } from "../middleware/auth.middleware";
-// const {
-//   getCart,
-//   addToCart,
-//   removeFromCart,
-// } = require("../controllers/cart.controller");
-
-// const router = Router();
-// router.use(authMiddleware);
-
-// router.get("/", getCart);
-// router.post("/add", addToCart);
-// router.delete("/remove/:productId", removeFromCart);
-
 import { Router } from "express";
 import { authMiddleware } from "../middleware/auth.middleware";
 import {

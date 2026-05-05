@@ -9,7 +9,7 @@ const getAllPromociones = async (
 ) => {
   try {
     const Promociones = await prisma.promociones.findMany({
-      where: { eliminado: 0, status: 1 },
+      where: { eliminado: false, status: 1 },
     });
 
     res.json(Promociones);
@@ -73,7 +73,7 @@ const deletePromocion = async (
 
     const deletePromocion = await prisma.promociones.update({
       where: { id: Number(id) },
-      data: { eliminado: 1 },
+      data: { eliminado: true },
     });
     if (!deletePromocion) {
       return res.status(404).json({ error: "Promocion not found" });

@@ -238,12 +238,12 @@ export const adminDashboard = async (
         }),
         // Productos con stock bajo (menos de 5 unidades)
         prisma.productos.findMany({
-          where: { eliminado: 0, stock: { lte: 5 } },
+          where: { eliminado: false, stock: { lte: 5 } },
           select: { id: true, nombre: true, codigo: true, stock: true },
           orderBy: { stock: "asc" },
         }),
         // Total de clientes activos
-        prisma.clientes.count({ where: { eliminado: 0 } }),
+        prisma.clientes.count({ where: { eliminado: false } }),
       ]);
 
     // Calcular ventas del mes

@@ -3,116 +3,156 @@ generator client {
 }
 
 datasource db {
- provider          = "postgresql"
-  url               = env("DATABASE_URL")
-   directUrl = env("DIRECT_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
- 
+ provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  directUrl = env("DATABASE_URL_UNPOOLED")  
 }
 
+// ─────────────────────────────────────────────
+// Catálogos
+// ─────────────────────────────────────────────
+
 model categorias {
-  id        Int         @id @default(autoincrement())
-  nombre    String      @db.VarChar(128)
-  slug      String      @unique @db.VarChar(128)
-  eliminado Int?        @default(0)
+  id        Int        @id @default(autoincrement())
+  nombre    String     @db.VarChar(128)
+  slug      String     @unique @db.VarChar(128)
+  eliminado Boolean    @default(false)
   productos productos[]
 }
 
+model editoriales {
+  id        Int        @id @default(autoincrement())
+  nombre    String     @unique @db.VarChar(128)
+  slug      String     @unique @db.VarChar(128)
+  eliminado Boolean    @default(false)
+  productos productos[]
+}
+
+// ─────────────────────────────────────────────
+// Usuarios
+// ─────────────────────────────────────────────
+
 model clientes {
-  id        Int     @id(map: "pk_clientes") @default(autoincrement())
-  nombre    String  @db.VarChar(128)
-  apellidos String  @db.VarChar(128)
-  correo    String  @unique(map: "idx_correo") @db.VarChar(128)
-  pass      String  @db.VarChar(255)
-  telefono  String? @db.VarChar(15)
-  direccion String?
-  eliminado Int?    @default(0)
-  pedidos   pedidos[]
-  pushSubscriptions PushSubscription[]
+  id         Int      @id(map: "pk_clientes") @default(autoincrement())
+  nombre     String   @db.VarChar(128)
+  apellidos  String   @db.VarChar(128)
+  correo     String   @unique(map: "idx_correo") @db.VarChar(128)
+  pass       String   @db.VarChar(255)
+  telefono   String?  @db.VarChar(15)
+  direccion  String?
+  eliminado  Boolean  @default(false)
+
+  pedidos           pedidos[]
+  push_subscriptions push_subscriptions[]
 }
 
 model empleados {
-  id             Int     @id(map: "pk_empleados") @default(autoincrement())
-  nombre         String? @db.VarChar(128)
-  apellidos      String? @db.VarChar(128)
-  correo         String? @db.VarChar(128)
-  pass           String? @db.VarChar(255)
-  rol            Int?
-  archivo_nombre String? @db.VarChar(255)
-  archivo_file   String? @db.VarChar(128)
-  eliminado      Int?    @default(0)
+  id            Int     @id(map: "pk_empleados") @default(autoincrement())
+  nombre        String? @db.VarChar(128)
+  apellidos     String? @db.VarChar(128)
+  correo        String? @unique @db.VarChar(128)
+  pass          String? @db.VarChar(255)
+  rol           Int?    @default(2)           // 1 = admin, 2 = empleado
+  cloudinary_id String? @db.VarChar(255)
+  archivo_url   String? @db.VarChar(512)
+  eliminado     Boolean @default(false)
 }
 
-model pedidos {
- id         Int      @id @default(autoincrement())
-  fecha      DateTime @db.Date
-  id_cliente Int
-  status     Int?     @default(0)
-
-  cliente clientes @relation(fields: [id_cliente], references: [id])
-
-  pedidos_productos pedidos_productos[]
-
-  @@unique([id_cliente, status])
- 
-}
-
-model pedidos_productos {
-  id          Int       @id(map: "pk_pedidos_productos") @default(autoincrement())
-  id_pedido   Int
-  id_producto Int
-  cantidad    Int
-  precio      Float
-  pedidos     pedidos   @relation(fields: [id_pedido], references: [id], onUpdate: Restrict, map: "pedidos_productos_ibfk_1")
-  productos   productos @relation(fields: [id_producto], references: [id], onUpdate: Restrict, map: "pedidos_productos_ibfk_2")
-
-  @@unique([id_pedido, id_producto])
-  @@index([id_pedido], map: "idx_id_pedido")
-  @@index([id_producto], map: "idx_id_producto")
-}
+// ─────────────────────────────────────────────
+// Productos
+// ─────────────────────────────────────────────
 
 model productos {
   id          Int     @id(map: "pk_productos") @default(autoincrement())
   nombre      String? @db.VarChar(128)
-  codigo      String? @db.VarChar(32)
+  codigo      String? @unique @db.VarChar(32)  // ISBN u otro identificador único
   descripcion String?
   costo       Float?
-  stock       Int?
+  stock       Int?    @default(0)
 
-  // Campos viejos — se mantienen opcionales por ahora, se eliminan en fase 2
+  // Campos legacy (mantener hasta completar migración a Cloudinary)
   archivo_n String? @db.VarChar(255)
   archivo   String? @db.VarChar(128)
 
-  // Campos nuevos para Cloudinary
+  // Cloudinary
   cloudinary_id String? @db.VarChar(255)
   archivo_url   String? @db.VarChar(512)
 
-  // Campos nuevos de categoría y fecha
+  // Clasificación
   id_categoria  Int?
-  fecha_ingreso DateTime? @default(now())
+  id_editorial  Int?
+  fecha_ingreso DateTime @default(now())
+  eliminado     Boolean  @default(false)
 
-  eliminado Int? @default(0) @db.SmallInt
+  categoria  categorias?  @relation(fields: [id_categoria], references: [id])
+  editorial  editoriales? @relation(fields: [id_editorial], references: [id])
+  pedidos_productos pedidos_productos[]
 
-  categoria         categorias?         @relation(fields: [id_categoria], references: [id])
+  @@index([id_categoria])
+  @@index([id_editorial])
+}
+
+// ─────────────────────────────────────────────
+// Pedidos
+// ─────────────────────────────────────────────
+
+model pedidos {
+  id         Int      @id @default(autoincrement())
+  fecha      DateTime @default(now())
+  id_cliente Int
+  status     Int      @default(0)
+
+  cliente           clientes            @relation(fields: [id_cliente], references: [id])
   pedidos_productos pedidos_productos[]
 }
+
+model pedidos_productos {
+  id          Int   @id(map: "pk_pedidos_productos") @default(autoincrement())
+  id_pedido   Int
+  id_producto Int
+  cantidad    Int
+  precio      Float
+
+  pedidos   pedidos   @relation(fields: [id_pedido], references: [id], onUpdate: Restrict)
+  productos productos @relation(fields: [id_producto], references: [id], onUpdate: Restrict)
+
+  @@unique([id_pedido, id_producto])
+  @@index([id_pedido])
+  @@index([id_producto])
+}
+
+// ─────────────────────────────────────────────
+// Promociones
+// ─────────────────────────────────────────────
 
 model promociones {
   id     Int    @id(map: "pk_promociones") @default(autoincrement())
   nombre String @db.VarChar(128)
 
-  // Campo viejo — se mantiene opcional por ahora
+  // Campos legacy
   archivo String? @db.VarChar(64)
 
-  // Campo nuevo para Cloudinary
-  archivo_url String? @db.VarChar(512)
+  // Cloudinary
+  cloudinary_id String? @db.VarChar(255)
+  archivo_url   String? @db.VarChar(512)
 
-  status    Int? @default(1)
-  eliminado Int? @default(0)
+  status    Int     @default(1)
+  eliminado Boolean @default(false)
 }
-model PushSubscription {
-  id           Int    @id @default(autoincrement())
-  userId       Int    
-  subscription String 
-  cliente         clientes   @relation(fields: [userId], references: [id])
+
+// ─────────────────────────────────────────────
+// Push notifications
+// ─────────────────────────────────────────────
+
+model push_subscriptions {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  subscription String   @db.Text
+  createdAt    DateTime @default(now())
+
+  cliente clientes @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subscription])
+  @@index([userId])
 }

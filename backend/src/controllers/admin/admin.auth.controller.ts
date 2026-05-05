@@ -14,7 +14,7 @@ export const adminLogin = async (req: Request, res: Response) => {
     const empleado = await prisma.empleados.findFirst({
       where: {
         correo,
-        eliminado: 0,
+        eliminado: false,
       },
     });
 

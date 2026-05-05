@@ -1,20 +1,3 @@
-// import { Router } from "express";
-// import { adminLogin, adminMe } from "../controllers/admin.auth.controller";
-// import { adminMiddleware } from "../middleware/admin.middleware";
-
-// const router = Router();
-
-// // Ruta pública — no requiere token
-// router.post("/auth/login", adminLogin);
-
-// // Ruta protegida — verifica token y rol
-// router.get("/auth/me", adminMiddleware, adminMe);
-
-// // Aquí irán las rutas de productos, pedidos, clientes en la siguiente fase
-// // router.use("/productos", adminMiddleware, productosAdminRoutes);
-// // router.use("/pedidos", adminMiddleware, pedidosAdminRoutes);
-
-// export default router;
 import { Router } from "express";
 import multer from "multer";
 import {
@@ -30,6 +13,8 @@ import {
   adminEliminarProducto,
   adminGetCategorias,
   adminCrearCategoria,
+  adminGetEditoriales,
+  adminCrearEditorial,
 } from "../controllers/admin/admin.productos.controller";
 import {
   adminGetClientes,
@@ -86,6 +71,10 @@ router.delete("/productos/:id", adminMiddleware, adminEliminarProducto);
 // ── Categorías ────────────────────────────────────────────────────────────────
 router.get("/categorias", adminMiddleware, adminGetCategorias);
 router.post("/categorias", adminMiddleware, adminCrearCategoria);
+
+// ── Editoriales ────────────────────────────────────────────────────────────────
+router.get("/editoriales", adminMiddleware, adminGetEditoriales);
+router.post("/editoriales", adminMiddleware, adminCrearEditorial);
 
 // ── Clientes ──────────────────────────────────────────────────────────────────
 router.get("/clientes", adminMiddleware, adminGetClientes);

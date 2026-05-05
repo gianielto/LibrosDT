@@ -9,7 +9,7 @@ const getAllProduct = async (
 ) => {
   try {
     const Product = await prisma.productos.findMany({
-      where: { eliminado: 0 },
+      where: { eliminado: false },
     });
 
     res.json(Product);
@@ -75,7 +75,7 @@ const deleteProduct = async (
 
     const deleteProduct = await prisma.productos.update({
       where: { id: Number(id) },
-      data: { eliminado: 1 },
+      data: { eliminado: true },
     });
     if (!deleteProduct) {
       return res.status(404).json({ error: "Product not found" });
