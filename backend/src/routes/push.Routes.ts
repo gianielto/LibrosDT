@@ -19,10 +19,11 @@ router.post("/subscribe", async (req: Request, res: Response) => {
   try {
     // Guardamos la subscription en la DB
     // upsert: si ya existe para ese usuario, la actualiza
-    await prisma.pushSubscription.create({
+    await prisma.push_subscriptions.create({
       data: { userId, subscription: JSON.stringify(subscription) },
     });
-    // await prisma.pushSubscription.upsert({
+    // await prisma.push_subscriptions.upsert({
+
     //   where: { userId },
     //   update: {
     //     subscription: JSON.stringify(subscription),
@@ -32,6 +33,20 @@ router.post("/subscribe", async (req: Request, res: Response) => {
     //     subscription: JSON.stringify(subscription),
     //   },
     // });
+    await prisma.push_subscriptions.upsert({
+      where: {
+        userId_subscription: {
+          userId,
+          subscription: JSON.stringify(subscription),
+        },
+      },
+      update: {},
+      create: {
+        userId,
+        subscription: JSON.stringify(subscription),
+      },
+    });
+
     res.status(201).json({ message: "Suscripción guardada" });
   } catch (error) {
     res.status(500).json({ error: "Error guardando suscripción" });
@@ -48,7 +63,7 @@ router.post("/notify/:userId", async (req: Request, res: Response) => {
   console.log("Body:", req.body);
 
   try {
-    const record = await prisma.pushSubscription.findMany({
+    const record = await prisma.push_subscriptions.findMany({
       where: { userId: Number(userId) },
     });
 

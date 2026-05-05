@@ -18,7 +18,7 @@ export const adminGetProductos = async (
       : undefined;
 
     const where = {
-      eliminado: 0,
+      eliminado: false,
       ...(busqueda && {
         OR: [
           { nombre: { contains: busqueda, mode: "insensitive" as const } },

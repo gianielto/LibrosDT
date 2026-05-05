@@ -14,7 +14,7 @@ export const adminGetClientes = async (
     const busqueda = req.query.busqueda as string | undefined;
 
     const where = {
-      eliminado: 0,
+      eliminado: false,
       ...(busqueda && {
         OR: [
           { nombre: { contains: busqueda, mode: "insensitive" as const } },
@@ -93,7 +93,7 @@ export const adminGetCliente = async (
       },
     });
 
-    if (!cliente || cliente.eliminado === 1) {
+    if (!cliente || cliente.eliminado === true) {
       return res.status(404).json({ message: "Cliente no encontrado" });
     }
 
@@ -157,13 +157,13 @@ export const adminEliminarCliente = async (
 
     const cliente = await prisma.clientes.findUnique({ where: { id } });
 
-    if (!cliente || cliente.eliminado === 1) {
+    if (!cliente || cliente.eliminado === true) {
       return res.status(404).json({ message: "Cliente no encontrado" });
     }
 
     await prisma.clientes.update({
       where: { id },
-      data: { eliminado: 1 },
+      data: { eliminado: true },
     });
 
     return res.json({ message: "Cliente eliminado correctamente" });

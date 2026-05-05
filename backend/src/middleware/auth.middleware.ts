@@ -8,7 +8,7 @@ export const authMiddleware = async (
   next: NextFunction,
 ) => {
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
-  console.log("Token recibido en middleware:", token);
+  // console.log("Token recibido en middleware:", token);
   if (!token) {
     return res.status(401).json({ message: "NO TOKEN" });
   }

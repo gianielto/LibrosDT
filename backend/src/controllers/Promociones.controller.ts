@@ -73,7 +73,7 @@ const deletePromocion = async (
 
     const deletePromocion = await prisma.promociones.update({
       where: { id: Number(id) },
-      data: { eliminado: 1 },
+      data: { eliminado: true },
     });
     if (!deletePromocion) {
       return res.status(404).json({ error: "Promocion not found" });

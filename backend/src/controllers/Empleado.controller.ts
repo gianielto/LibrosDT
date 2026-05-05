@@ -47,8 +47,8 @@ const createEmpleado = async (
     correo,
     pass,
     rol,
-    archivo_nombre,
-    archivo_file,
+    archivo_url,
+    cloudinary_id,
     eliminado,
   } = req.body;
 
@@ -61,8 +61,8 @@ const createEmpleado = async (
         correo,
         pass,
         rol,
-        archivo_nombre,
-        archivo_file,
+        archivo_url,
+        cloudinary_id,
         eliminado,
       },
     });
@@ -82,7 +82,7 @@ const deleteEmpleado = async (
 
     const deleteEmpleado = await prisma.empleados.update({
       where: { id: Number(id) },
-      data: { eliminado: 1 },
+      data: { eliminado: true },
     });
     if (!deleteEmpleado) {
       return res.status(404).json({ error: "Empleado not found" });
@@ -112,8 +112,8 @@ const updateEmpleado = async (
       correo,
       pass,
       rol,
-      archivo_nombre,
-      archivo_file,
+      archivo_url,
+      cloudinary_id,
       eliminado,
     } = req.body;
 
@@ -125,8 +125,8 @@ const updateEmpleado = async (
         correo,
         pass,
         rol,
-        archivo_nombre,
-        archivo_file,
+        archivo_url,
+        cloudinary_id,
         eliminado,
       },
     });
