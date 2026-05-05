@@ -87,8 +87,15 @@ export const adminCrearProducto = async (
   next: NextFunction,
 ) => {
   try {
-    const { nombre, codigo, descripcion, costo, stock, id_categoria } =
-      req.body;
+    const {
+      nombre,
+      codigo,
+      descripcion,
+      costo,
+      stock,
+      id_categoria,
+      id_editorial,
+    } = req.body;
 
     if (!nombre || !codigo || !costo || !stock) {
       return res.status(400).json({
@@ -130,6 +137,7 @@ export const adminCrearProducto = async (
         costo: parseFloat(costo),
         stock: parseInt(stock),
         id_categoria: id_categoria ? parseInt(id_categoria) : undefined,
+        id_editorial: id_editorial ? parseInt(id_editorial) : undefined,
         cloudinary_id,
         archivo_url,
       },
@@ -153,8 +161,15 @@ export const adminActualizarProducto = async (
       return res.status(400).json({ message: "ID inválido" });
     }
 
-    const { nombre, codigo, descripcion, costo, stock, id_categoria } =
-      req.body;
+    const {
+      nombre,
+      codigo,
+      descripcion,
+      costo,
+      stock,
+      id_categoria,
+      id_editorial,
+    } = req.body;
 
     // Buscar el producto actual para saber si tiene imagen vieja
     const productoActual = await prisma.productos.findUnique({
@@ -204,6 +219,7 @@ export const adminActualizarProducto = async (
         costo: costo ? parseFloat(costo) : undefined,
         stock: stock ? parseInt(stock) : undefined,
         id_categoria: id_categoria ? parseInt(id_categoria) : undefined,
+        id_editorial: id_editorial ? parseInt(id_editorial) : undefined,
         cloudinary_id,
         archivo_url,
       },

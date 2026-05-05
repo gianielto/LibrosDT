@@ -10,6 +10,11 @@ const getAllProduct = async (
   try {
     const Product = await prisma.productos.findMany({
       where: { eliminado: false },
+      include: {
+        editorial: true,
+        categoria: true,
+        // autor: true,
+      },
     });
 
     res.json(Product);
@@ -28,6 +33,11 @@ const getProduct = async (req: Request, res: Response, next: NextFunction) => {
 
     const Product = await prisma.productos.findUnique({
       where: { id: id },
+      include: {
+        editorial: true,
+        categoria: true,
+        // autor: true,
+      },
     });
     if (!Product) {
       return res.status(404).json({ error: "Product not found" });
