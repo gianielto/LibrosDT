@@ -45,7 +45,9 @@
   font-weight: bold;
 }
 
-.card-book-code {
+.card-book-code,
+.card-book-editorial,
+.card-book-autor {
   font-size: 0.9rem;
   color: #8b6f5c;
 }

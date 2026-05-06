@@ -10,8 +10,10 @@ interface CardBookProps {
   title: string;
   img: string;
   precio: number | string;
-  codigo: string;
+  codigo?: string;
   stock?: number;
+  editorial?: string;
+  autor?: string;
 }
 
 const CardBook: React.FC<CardBookProps> = ({
@@ -21,6 +23,8 @@ const CardBook: React.FC<CardBookProps> = ({
   precio,
   codigo,
   stock,
+  editorial,
+  autor,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState("");
@@ -63,11 +67,15 @@ const CardBook: React.FC<CardBookProps> = ({
 
       <div className="card-book-details">
         <h3 className="card-book-title">{title}</h3>
-        <p className="card-book-price">$ {precio}</p>
-        <p className="card-book-code">codigo: {codigo}</p>
+        {stock !== undefined && stock !== null && (
+          <p className="card-book-code">codigo: {codigo}</p>
+        )}
         {stock !== undefined && stock !== null && (
           <p className="card-book-stock">stock: {stock}</p>
         )}
+        <p className="card-book-autor">autor: {autor}</p>
+        <p className="card-book-editorial">ed: {editorial}</p>
+        <p className="card-book-price">$ {precio}</p>
       </div>
 
       {user && (

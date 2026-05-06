@@ -12,6 +12,14 @@ interface Item {
     imagen: string;
     stock: number;
     imagen_url?: string;
+    editorial?: {
+      id: number;
+      nombre: string;
+    };
+    autor?: {
+      id: number;
+      nombre: string;
+    };
   };
   cantidad: number;
 }
@@ -77,6 +85,8 @@ const Carrito = () => {
           precio={item.producto.precio}
           cantidadInicial={item.cantidad}
           stock={item.producto.stock}
+          editorial={item.producto.editorial?.nombre || "Sin editorial"}
+          autor={item.producto.autor?.nombre || "Sin autor"}
           onRemove={handleRemove}
           onUpdate={handleUpdate}
         />
