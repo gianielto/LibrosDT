@@ -3,9 +3,8 @@ generator client {
 }
 
 datasource db {
- provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
-  // uncomment next line if you use Prisma <5.10
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DATABASE_URL_UNPOOLED")  
 }
 
@@ -18,6 +17,7 @@ model categorias {
   nombre    String     @db.VarChar(128)
   slug      String     @unique @db.VarChar(128)
   eliminado Boolean    @default(false)
+
   productos productos[]
 }
 
@@ -26,7 +26,20 @@ model editoriales {
   nombre    String     @unique @db.VarChar(128)
   slug      String     @unique @db.VarChar(128)
   eliminado Boolean    @default(false)
+
   productos productos[]
+}
+
+// 🆕 AUTORES
+model autores {
+  id                Int      @id @default(autoincrement())
+  nombre            String   @db.VarChar(128)
+  fecha_nacimiento  DateTime?
+  slug              String   @unique @db.VarChar(128) 
+  nacionalidad      String?  @db.VarChar(64)
+  eliminado         Boolean  @default(false)
+
+  productos_autores productos_autores[]
 }
 
 // ─────────────────────────────────────────────
@@ -43,7 +56,7 @@ model clientes {
   direccion  String?
   eliminado  Boolean  @default(false)
 
-  pedidos           pedidos[]
+  pedidos            pedidos[]
   push_subscriptions push_subscriptions[]
 }
 
@@ -53,7 +66,7 @@ model empleados {
   apellidos     String? @db.VarChar(128)
   correo        String? @unique @db.VarChar(128)
   pass          String? @db.VarChar(255)
-  rol           Int?    @default(2)           // 1 = admin, 2 = empleado
+  rol           Int?    @default(2)
   cloudinary_id String? @db.VarChar(255)
   archivo_url   String? @db.VarChar(512)
   eliminado     Boolean @default(false)
@@ -66,12 +79,12 @@ model empleados {
 model productos {
   id          Int     @id(map: "pk_productos") @default(autoincrement())
   nombre      String? @db.VarChar(128)
-  codigo      String? @unique @db.VarChar(32)  // ISBN u otro identificador único
+  codigo      String? @unique @db.VarChar(32)
   descripcion String?
   costo       Float?
   stock       Int?    @default(0)
 
-  // Campos legacy (mantener hasta completar migración a Cloudinary)
+  // Campos legacy
   archivo_n String? @db.VarChar(255)
   archivo   String? @db.VarChar(128)
 
@@ -87,10 +100,24 @@ model productos {
 
   categoria  categorias?  @relation(fields: [id_categoria], references: [id])
   editorial  editoriales? @relation(fields: [id_editorial], references: [id])
-  pedidos_productos pedidos_productos[]
+
+  pedidos_productos  pedidos_productos[]
+  productos_autores  productos_autores[]   // 🆕 relación con autores
 
   @@index([id_categoria])
   @@index([id_editorial])
+}
+
+// 🆕 TABLA INTERMEDIA
+model productos_autores {
+  id_producto Int
+  id_autor    Int
+
+  producto productos @relation(fields: [id_producto], references: [id], onDelete: Cascade)
+  autor    autores   @relation(fields: [id_autor], references: [id], onDelete: Cascade)
+
+  @@id([id_producto, id_autor])
+  @@index([id_autor])
 }
 
 // ─────────────────────────────────────────────
@@ -130,10 +157,8 @@ model promociones {
   id     Int    @id(map: "pk_promociones") @default(autoincrement())
   nombre String @db.VarChar(128)
 
-  // Campos legacy
   archivo String? @db.VarChar(64)
 
-  // Cloudinary
   cloudinary_id String? @db.VarChar(255)
   archivo_url   String? @db.VarChar(512)
 

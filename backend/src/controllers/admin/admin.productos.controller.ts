@@ -33,14 +33,26 @@ export const adminGetProductos = async (
         where,
         skip,
         take: limit,
-        include: { categoria: true },
+        include: {
+          categoria: true,
+          editorial: true,
+          productos_autores: {
+            include: {
+              autor: true,
+            },
+          },
+        },
         orderBy: { fecha_ingreso: "desc" },
       }),
       prisma.productos.count({ where }),
     ]);
+    const productosLimpios = productos.map((p) => ({
+      ...p,
+      autores: p.productos_autores.map((pa) => pa.autor),
+    }));
 
     return res.json({
-      data: productos,
+      data: productosLimpios,
       meta: {
         total,
         page,
@@ -67,14 +79,26 @@ export const adminGetProducto = async (
 
     const producto = await prisma.productos.findUnique({
       where: { id },
-      include: { categoria: true },
+      include: {
+        categoria: true,
+        editorial: true,
+        productos_autores: {
+          include: {
+            autor: true,
+          },
+        },
+      },
     });
 
     if (!producto || producto.eliminado === true) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
-
-    return res.json(producto);
+    const productoLimpio = {
+      ...producto,
+      autores: producto.productos_autores.map((pa) => pa.autor),
+    };
+    // return res.json(producto);
+    return res.json(productoLimpio);
   } catch (error) {
     next(error);
   }
@@ -95,6 +119,7 @@ export const adminCrearProducto = async (
       stock,
       id_categoria,
       id_editorial,
+      autores,
     } = req.body;
 
     if (!nombre || !codigo || !costo || !stock) {
@@ -129,6 +154,26 @@ export const adminCrearProducto = async (
       archivo_url = resultado.secure_url;
     }
 
+    // const producto = await prisma.productos.create({
+    //   data: {
+    //     nombre,
+    //     codigo,
+    //     descripcion,
+    //     costo: parseFloat(costo),
+    //     stock: parseInt(stock),
+    //     id_categoria: id_categoria ? parseInt(id_categoria) : undefined,
+    //     id_editorial: id_editorial ? parseInt(id_editorial) : undefined,
+    //     cloudinary_id,
+    //     archivo_url,
+    //     productos_autores: autores
+    //       ? {
+    //           create: autores.map((id_autor: number) => ({
+    //             autor: { connect: { id: id_autor } },
+    //           })),
+    //         }
+    //       : undefined,
+    //   },
+    // });
     const producto = await prisma.productos.create({
       data: {
         nombre,
@@ -140,9 +185,26 @@ export const adminCrearProducto = async (
         id_editorial: id_editorial ? parseInt(id_editorial) : undefined,
         cloudinary_id,
         archivo_url,
+
+        // 👇 AQUÍ ESTÁ LO NUEVO
+        productos_autores: autores
+          ? {
+              create: autores.map((id_autor: number) => ({
+                autor: { connect: { id: id_autor } },
+              })),
+            }
+          : undefined,
+      },
+      include: {
+        categoria: true,
+        editorial: true,
+        productos_autores: {
+          include: {
+            autor: true,
+          },
+        },
       },
     });
-
     return res.status(201).json(producto);
   } catch (error) {
     next(error);
@@ -169,6 +231,7 @@ export const adminActualizarProducto = async (
       stock,
       id_categoria,
       id_editorial,
+      autores,
     } = req.body;
 
     // Buscar el producto actual para saber si tiene imagen vieja
@@ -210,6 +273,20 @@ export const adminActualizarProducto = async (
       archivo_url = resultado.secure_url;
     }
 
+    // const productoActualizado = await prisma.productos.update({
+    //   where: { id },
+    //   data: {
+    //     nombre,
+    //     codigo,
+    //     descripcion,
+    //     costo: costo ? parseFloat(costo) : undefined,
+    //     stock: stock ? parseInt(stock) : undefined,
+    //     id_categoria: id_categoria ? parseInt(id_categoria) : undefined,
+    //     id_editorial: id_editorial ? parseInt(id_editorial) : undefined,
+    //     cloudinary_id,
+    //     archivo_url,
+    //   },
+    // });
     const productoActualizado = await prisma.productos.update({
       where: { id },
       data: {
@@ -222,9 +299,26 @@ export const adminActualizarProducto = async (
         id_editorial: id_editorial ? parseInt(id_editorial) : undefined,
         cloudinary_id,
         archivo_url,
+
+        productos_autores: autores
+          ? {
+              deleteMany: {},
+              create: autores.map((id_autor: number) => ({
+                autor: { connect: { id: id_autor } },
+              })),
+            }
+          : undefined,
+      },
+      include: {
+        categoria: true,
+        editorial: true,
+        productos_autores: {
+          include: {
+            autor: true,
+          },
+        },
       },
     });
-
     return res.json(productoActualizado);
   } catch (error) {
     next(error);

@@ -1,3 +1,4 @@
+// Product.controller.ts
 import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
 import { parse } from "path";
@@ -13,7 +14,11 @@ const getAllProduct = async (
       include: {
         editorial: true,
         categoria: true,
-        // autor: true,
+        productos_autores: {
+          include: {
+            autor: true,
+          },
+        },
       },
     });
 
@@ -36,7 +41,11 @@ const getProduct = async (req: Request, res: Response, next: NextFunction) => {
       include: {
         editorial: true,
         categoria: true,
-        // autor: true,
+        productos_autores: {
+          include: {
+            autor: true,
+          },
+        },
       },
     });
     if (!Product) {
