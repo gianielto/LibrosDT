@@ -6,6 +6,7 @@ import type {
   Categoria,
   PaginatedResponse,
   Editorial,
+  Autor,
 } from "../types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,6 +27,7 @@ import type { AxiosError } from "axios";
 export default function Productos() {
   const [productos, setProductos] = useState<Producto[]>([]);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [autores, setAutores] = useState<Autor[]>([]);
   const [editoriales, setEditoriales] = useState<Editorial[]>([]);
   const [meta, setMeta] = useState({ total: 0, page: 1, totalPages: 1 });
   const [busqueda, setBusqueda] = useState("");
@@ -75,6 +77,8 @@ export default function Productos() {
     api
       .get<Editorial[]>("/editoriales")
       .then((res) => setEditoriales(res.data));
+
+    api.get<Autor[]>("/autores").then((res) => setAutores(res.data));
   }, []);
 
   // Recargar productos cuando cambien filtros
@@ -305,6 +309,7 @@ export default function Productos() {
           producto={productoEditando}
           categorias={categorias}
           editoriales={editoriales}
+          autores={autores}
           onClose={cerrarModal}
           onGuardado={() => cargarProductos(meta.page)}
         />

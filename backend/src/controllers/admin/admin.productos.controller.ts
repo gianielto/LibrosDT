@@ -1,3 +1,4 @@
+// Archivo: backend/src/controllers/admin/admin.productos.controller.ts
 import { Request, Response, NextFunction } from "express";
 import prisma from "../../lib/prisma";
 import cloudinary from "../../lib/cloudinary";
@@ -17,6 +18,20 @@ export const adminGetProductos = async (
       ? parseInt(req.query.id_categoria as string)
       : undefined;
 
+    // const where = {
+    //   eliminado: false,
+    //   ...(busqueda && {
+    //     OR: [
+    //       { nombre: { contains: busqueda, mode: "insensitive" as const } },
+    //       { codigo: { contains: busqueda, mode: "insensitive" as const } },
+    //     ],
+    //   }),
+    //   ...(id_categoria && { id_categoria }),
+    // };
+    const id_editorial = req.query.id_editorial
+      ? parseInt(req.query.id_editorial as string)
+      : undefined;
+
     const where = {
       eliminado: false,
       ...(busqueda && {
@@ -26,8 +41,8 @@ export const adminGetProductos = async (
         ],
       }),
       ...(id_categoria && { id_categoria }),
+      ...(id_editorial && { id_editorial }), // 👈 FALTABA
     };
-
     const [productos, total] = await Promise.all([
       prisma.productos.findMany({
         where,
@@ -121,6 +136,11 @@ export const adminCrearProducto = async (
       id_editorial,
       autores,
     } = req.body;
+    let autoresIds: number[] = [];
+
+    if (autores) {
+      autoresIds = typeof autores === "string" ? JSON.parse(autores) : autores;
+    }
 
     if (!nombre || !codigo || !costo || !stock) {
       return res.status(400).json({
@@ -186,10 +206,16 @@ export const adminCrearProducto = async (
         cloudinary_id,
         archivo_url,
 
-        // 👇 AQUÍ ESTÁ LO NUEVO
-        productos_autores: autores
+        // productos_autores: autores
+        //   ? {
+        //       create: autores.map((id_autor: number) => ({
+        //         autor: { connect: { id: id_autor } },
+        //       })),
+        //     }
+        //   : undefined,
+        productos_autores: autoresIds.length
           ? {
-              create: autores.map((id_autor: number) => ({
+              create: autoresIds.map((id_autor) => ({
                 autor: { connect: { id: id_autor } },
               })),
             }
@@ -233,6 +259,11 @@ export const adminActualizarProducto = async (
       id_editorial,
       autores,
     } = req.body;
+    let autoresIds: number[] = [];
+
+    if (autores) {
+      autoresIds = typeof autores === "string" ? JSON.parse(autores) : autores;
+    }
 
     // Buscar el producto actual para saber si tiene imagen vieja
     const productoActual = await prisma.productos.findUnique({
@@ -300,10 +331,10 @@ export const adminActualizarProducto = async (
         cloudinary_id,
         archivo_url,
 
-        productos_autores: autores
+        productos_autores: autoresIds.length
           ? {
               deleteMany: {},
-              create: autores.map((id_autor: number) => ({
+              create: autoresIds.map((id_autor: number) => ({
                 autor: { connect: { id: id_autor } },
               })),
             }
@@ -435,6 +466,86 @@ export const adminCrearEditorial = async (
     });
 
     return res.status(201).json(editorial);
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return res.status(400).json({ message: "El slug ya existe" });
+    }
+    next(error);
+  }
+};
+
+// ─── CRUD de Autores ───────────────────────────────────────────────
+
+// export const adminGetAutores = async (
+//   _req: Request,
+//   res: Response,
+//   next: NextFunction,
+// ) => {
+//   try {
+//     const autores = await prisma.autores.findMany({
+//       where: { eliminado: false },
+//       orderBy: { nombre: "asc" },
+//     });
+
+//     return res.json(autores);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+export const adminGetAutores = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const search = req.query.search as string;
+
+    const autores = await prisma.autores.findMany({
+      where: {
+        eliminado: false,
+        ...(search && {
+          nombre: {
+            contains: search,
+            mode: "insensitive",
+          },
+        }),
+      },
+      orderBy: { nombre: "asc" },
+      take: 10,
+    });
+
+    res.json(autores);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const adminCrearAutor = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { nombre, slug, fecha_nacimiento, nacionalidad } = req.body;
+
+    if (!nombre || !slug) {
+      return res.status(400).json({
+        message: "Nombre y slug son requeridos",
+      });
+    }
+
+    const autor = await prisma.autores.create({
+      data: {
+        nombre,
+        slug,
+        fecha_nacimiento: fecha_nacimiento
+          ? new Date(fecha_nacimiento)
+          : undefined,
+        nacionalidad,
+      },
+    });
+
+    return res.status(201).json(autor);
   } catch (error: any) {
     if (error.code === "P2002") {
       return res.status(400).json({ message: "El slug ya existe" });
