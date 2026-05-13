@@ -116,8 +116,13 @@ export default function ProductoDetalle() {
           <strong>Stock:</strong> {book.stock}
         </p>
         <p>
-          <strong>Autor:</strong>{" "}
-          {book.productos_autores?.[0]?.autor.nombre || "Sin autor"}
+          <strong>
+            {book.productos_autores?.length && book.productos_autores.length > 1
+              ? "Autores: "
+              : "Autor: "}
+          </strong>
+          {book.productos_autores?.map((pa) => pa.autor.nombre).join(", ") ||
+            "Sin autor"}
         </p>
         <p>
           <strong>Editorial:</strong>{" "}

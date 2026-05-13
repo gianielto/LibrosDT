@@ -2,7 +2,6 @@
 import CardBook from "../components/ui/productos/CardBook";
 import GridBook from "../components/ui/productos/gridBook";
 import { useEffect, useState } from "react";
-//import { Editorial } from '../../../admin-client/src/types/index';
 
 interface Book {
   id: number;
