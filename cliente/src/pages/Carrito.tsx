@@ -1,3 +1,4 @@
+// Carrito.tsx
 import { useEffect, useState } from "react";
 import CartItem from "../components/carrito/CartItem";
 import CartTotal from "../components/carrito/CartTotal";
@@ -16,11 +17,12 @@ interface Item {
       id: number;
       nombre: string;
     };
-    autor?: {
+    autor: {
       id: number;
       nombre: string;
-    };
+    }[];
   };
+
   cantidad: number;
 }
 
@@ -32,16 +34,14 @@ const Carrito = () => {
       credentials: "include",
     });
     const data = await res.json();
-
+    console.log("Carrito data:", data);
     setItems(data?.items || []);
-
-    console.log(data.items.imagen);
   };
 
   useEffect(() => {
     fetchCart();
   }, []);
-  useEffect(() => {}, [items]);
+  // useEffect(() => {}, [items]);
 
   const handleRemove = async (productoId: number) => {
     console.log("Producto ID a eliminar:", productoId);
@@ -86,7 +86,14 @@ const Carrito = () => {
           cantidadInicial={item.cantidad}
           stock={item.producto.stock}
           editorial={item.producto.editorial?.nombre || "Sin editorial"}
-          autor={item.producto.autor?.nombre || "Sin autor"}
+          // autor={
+          //   item.producto.productos_autores
+          //     ?.map((pa) => pa.autor.nombre)
+          //     .join(", ") || "Sin autor"
+          // }
+          autor={
+            item.producto.autor?.map((a) => a.nombre).join(", ") || "Sin autor"
+          }
           onRemove={handleRemove}
           onUpdate={handleUpdate}
         />

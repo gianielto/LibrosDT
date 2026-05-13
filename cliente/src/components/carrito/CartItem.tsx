@@ -45,7 +45,6 @@ const CartItem: React.FC<CartItemProps> = ({
     onUpdate(id, nuevaCantidad);
   };
   const subtotal = precio * cantidad;
-  console.log("imagen", imagen);
 
   return (
     <div className="cart-item">

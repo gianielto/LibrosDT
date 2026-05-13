@@ -16,10 +16,12 @@ interface Book {
     id: number;
     nombre: string;
   };
-  autor?: {
-    id: number;
-    nombre: string;
-  };
+  productos_autores?: {
+    autor: {
+      id: number;
+      nombre: string;
+    };
+  }[];
 }
 interface ProductosProps {
   numberOfProducts?: number;
@@ -61,7 +63,11 @@ export default function Productos({ numberOfProducts }: ProductosProps) {
           // codigo={book.codigo}
           // stock={book.stock}
           editorial={book.editorial?.nombre || "Sin editorial"}
-          autor={book.autor?.nombre || "Sin autor"}
+          // autor={book.productos_autores?.[0]?.autor?.nombre || "Sin autor"}
+          autor={
+            book.productos_autores?.map((pa) => pa.autor.nombre).join(", ") ||
+            "Sin autor"
+          }
         />
       ))}
     </GridBook>
