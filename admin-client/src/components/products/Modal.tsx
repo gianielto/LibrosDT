@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EntityAutocomplete } from "@/components/EntityAutocomplete/EntityAutocomplete";
 import { AutorModal } from "../autorModal/AutorModal";
+import { EditorialModal } from "../editoriales/EditorialModal";
 
 import {
   Select,
@@ -25,7 +26,6 @@ interface ProductoForm {
   stock: string;
   id_categoria: string;
   id_editorial?: string;
-  // autores?: Autor[];
 }
 
 const FORM_VACIO: ProductoForm = {
@@ -36,7 +36,6 @@ const FORM_VACIO: ProductoForm = {
   stock: "",
   id_categoria: "",
   id_editorial: "",
-  // autores: [],
 };
 
 interface ModalProps {
@@ -46,15 +45,16 @@ interface ModalProps {
   autores: Autor[];
   onClose: () => void;
   onGuardado: () => void;
+  onEditorialCreada: (editorial: Editorial) => void;
 }
 
 export const ProductoModal = ({
   producto,
   categorias,
   editoriales,
-  // autores,
   onClose,
   onGuardado,
+  onEditorialCreada,
 }: ModalProps) => {
   const [form, setForm] = useState<ProductoForm>(
     producto
@@ -66,15 +66,6 @@ export const ProductoModal = ({
           stock: producto.stock?.toString() ?? "",
           id_categoria: producto.id_categoria?.toString() ?? "",
           id_editorial: producto.id_editorial?.toString() ?? "",
-          // autores: producto.autores
-          //   ? producto.autores.map((autor) => ({
-          //       id: autor.id,
-          //       nombre: autor.nombre,
-          //       slug: autor.slug,
-          //       fecha_nacimiento: autor.fecha_nacimiento,
-          //     nacionalidad: autor.nacionalidad,
-          //   }))
-          // : [],
         }
       : FORM_VACIO,
   );
@@ -91,6 +82,9 @@ export const ProductoModal = ({
 
   const [autorModalOpen, setAutorModalOpen] = useState(false);
   const [nuevoAutorNombre, setNuevoAutorNombre] = useState("");
+
+  const [EditorialModalOpen, setEditorialModalOpen] = useState(false);
+  const [nuevaEditorialNombre, setNuevaEditorialNombre] = useState("");
 
   const handleImagen = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -118,6 +112,7 @@ export const ProductoModal = ({
       if (form.id_editorial) {
         formData.append("id_editorial", form.id_editorial);
       }
+
       if (autoresSeleccionados.length > 0) {
         //formData.append("autores", JSON.stringify(form.autores));
         formData.append("autores", JSON.stringify(autoresSeleccionados));
@@ -295,56 +290,20 @@ export const ProductoModal = ({
                 ))}
               </SelectContent>
             </Select>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="px-0 text-blue-600"
+              onClick={() => setEditorialModalOpen(true)}
+            >
+              + Nueva editorial
+            </Button>
           </div>
 
-          {/* Autores */}
-          {/* <div className="space-y-2">
-            <Label>Autores</Label>
-            <div className="max-h-40 overflow-y-auto border rounded-md p-2 space-y-1">
-              {autores.map((autor) => (
-                <label
-                  key={autor.id}
-                  className="flex items-center gap-2 text-sm"
-                >
-                  <div className="flex flex-wrap gap-1 mb-2">
-                    {autoresSeleccionados.map((id) => {
-                      const autor = autores.find((a) => a.id === id);
-                      return (
-                        <span
-                          key={id}
-                          className="bg-slate-200 px-2 py-1 rounded text-xs"
-                        >
-                          {autor?.nombre}
-                        </span>
-                      );
-                    })}
-                  </div>
-                  <input
-                    type="checkbox"
-                    checked={autoresSeleccionados.includes(autor.id)}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setAutoresSeleccionados((prev) => [...prev, autor.id]);
-                      } else {
-                        setAutoresSeleccionados((prev) =>
-                          prev.filter((id) => id !== autor.id),
-                        );
-                      }
-                    }}
-                  />
-                  {autor.nombre}
-                </label>
-              ))}
-            </div>
-          </div> */}
           <div className="space-y-2">
             <Label>Autores</Label>
-            {/* <EntityAutocomplete
-              endpoint="/autores"
-              selected={autoresSeleccionados}
-              onChange={setAutoresSeleccionados}
-              placeholder="Buscar autores..."
-            /> */}
+
             <EntityAutocomplete
               endpoint="/autores"
               selected={autoresSeleccionados}
@@ -381,6 +340,24 @@ export const ProductoModal = ({
             setAutoresSeleccionados((prev) => [...prev, autor.id]);
 
             setNuevoAutorNombre("");
+          }}
+        />
+      )}
+
+      {EditorialModalOpen && (
+        <EditorialModal
+          nombreInicial={nuevaEditorialNombre}
+          onClose={() => setEditorialModalOpen(false)}
+          onCreated={(editorial) => {
+            onEditorialCreada(editorial);
+
+            setForm((prev) => ({
+              ...prev,
+              id_editorial: editorial.id.toString(),
+            }));
+
+            setNuevaEditorialNombre("");
+            setEditorialModalOpen(false);
           }}
         />
       )}
