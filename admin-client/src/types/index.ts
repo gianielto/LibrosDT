@@ -10,6 +10,18 @@ export interface Categoria {
   nombre: string;
   slug: string;
 }
+export interface Editorial {
+  id: number;
+  nombre: string;
+  slug: string;
+}
+export interface Autor {
+  id: number;
+  nombre: string;
+  slug: string;
+  fecha_nacimiento: string | null;
+  nacionalidad: string | null;
+}
 
 export interface Producto {
   id: number;
@@ -24,6 +36,9 @@ export interface Producto {
   fecha_ingreso: string | null;
   eliminado: number | null;
   categoria: Categoria | null;
+  editorial?: Editorial | null;
+  id_editorial?: number | null;
+  autores?: Autor[] | null;
 }
 
 export interface Cliente {

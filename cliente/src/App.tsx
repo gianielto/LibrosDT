@@ -20,7 +20,7 @@ import ProtectedRoute from "./routes/ProtectedRoute.tsx";
 // import MasVendidos from "./pages/productos/mas-vendidos/MasVendidos";
 import MasVendidos from "./pages/productos/mas-vendidos/MasVendidos.tsx";
 import Novedades from "./pages/productos/Novedades.tsx";
-
+// import "./index.css";
 function App() {
   return (
     <AuthProvider>

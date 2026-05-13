@@ -14,6 +14,20 @@ interface Book {
   descripcion: string;
   id: number;
   archivo_url?: string;
+  editorial?: {
+    id: number;
+    nombre: string;
+  };
+  categoria?: {
+    id: number;
+    nombre: string;
+  };
+  productos_autores?: {
+    autor: {
+      id: number;
+      nombre: string;
+    };
+  }[];
 }
 
 export default function ProductoDetalle() {
@@ -100,6 +114,23 @@ export default function ProductoDetalle() {
         </p>
         <p>
           <strong>Stock:</strong> {book.stock}
+        </p>
+        <p>
+          <strong>
+            {book.productos_autores?.length && book.productos_autores.length > 1
+              ? "Autores: "
+              : "Autor: "}
+          </strong>
+          {book.productos_autores?.map((pa) => pa.autor.nombre).join(", ") ||
+            "Sin autor"}
+        </p>
+        <p>
+          <strong>Editorial:</strong>{" "}
+          {book.editorial?.nombre || "Sin editorial"}
+        </p>
+        <p>
+          <strong>Categoría:</strong>{" "}
+          {book.categoria?.nombre || "Sin categoría"}
         </p>
 
         <h2>Descripción</h2>

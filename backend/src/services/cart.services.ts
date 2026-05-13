@@ -34,7 +34,17 @@ export const getCartItems = async (clienteId: number) => {
     include: {
       pedidos_productos: {
         include: {
-          productos: true,
+          productos: {
+            include: {
+              editorial: true,
+              categoria: true,
+              productos_autores: {
+                include: {
+                  autor: true,
+                },
+              },
+            },
+          },
         },
       },
     },
@@ -53,6 +63,8 @@ export const getCartItems = async (clienteId: number) => {
       imagen: item.productos.archivo,
       imagen_url: item.productos.archivo_url,
       stock: item.productos.stock,
+      editorial: item.productos.editorial,
+      autor: item.productos.productos_autores.map((pa) => pa.autor),
     },
   }));
 };

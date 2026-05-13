@@ -11,6 +11,8 @@ interface CartItemProps {
   imagen: string;
   precio: number;
   stock: number;
+  editorial?: string;
+  autor?: string;
   cantidadInicial: number;
   onRemove: (id: number) => void;
   onUpdate: (id: number, nuevacantidad: number) => void;
@@ -23,6 +25,8 @@ const CartItem: React.FC<CartItemProps> = ({
   imagen,
   precio,
   stock,
+  editorial,
+  autor,
   cantidadInicial,
   onRemove,
   onUpdate,
@@ -41,7 +45,6 @@ const CartItem: React.FC<CartItemProps> = ({
     onUpdate(id, nuevaCantidad);
   };
   const subtotal = precio * cantidad;
-  console.log("imagen", imagen);
 
   return (
     <div className="cart-item">
@@ -54,6 +57,12 @@ const CartItem: React.FC<CartItemProps> = ({
           </p>
           <p>
             <strong>Código:</strong> {codigo}
+          </p>
+          <p>
+            <strong>Editorial:</strong> {editorial}
+          </p>
+          <p>
+            <strong>Autor:</strong> {autor}
           </p>
         </div>
       </div>

@@ -1,3 +1,4 @@
+// Archivo: backend/src/routes/admin.routes.ts
 import { Router } from "express";
 import multer from "multer";
 import {
@@ -15,6 +16,8 @@ import {
   adminCrearCategoria,
   adminGetEditoriales,
   adminCrearEditorial,
+  adminGetAutores,
+  adminCrearAutor,
 } from "../controllers/admin/admin.productos.controller";
 import {
   adminGetClientes,
@@ -75,6 +78,10 @@ router.post("/categorias", adminMiddleware, adminCrearCategoria);
 // ── Editoriales ────────────────────────────────────────────────────────────────
 router.get("/editoriales", adminMiddleware, adminGetEditoriales);
 router.post("/editoriales", adminMiddleware, adminCrearEditorial);
+
+// ── Autores ─────────────────────────────────────────────
+router.get("/autores", adminMiddleware, adminGetAutores);
+router.post("/autores", adminMiddleware, adminCrearAutor);
 
 // ── Clientes ──────────────────────────────────────────────────────────────────
 router.get("/clientes", adminMiddleware, adminGetClientes);
