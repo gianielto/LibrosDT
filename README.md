@@ -210,8 +210,6 @@ npm run dev
 - [ ] Autorización por roles (RBAC)
 - [ ] Integración de pagos (Stripe)
 - [ ] Almacenamiento de imágenes (Cloudinary / S3)
-- [ ] Capa de caché (Redis)
-- [ ] Testing automatizado (Jest + Supertest)
 - [ ] CI/CD pipelines
 
 ---
