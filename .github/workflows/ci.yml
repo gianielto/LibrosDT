@@ -1,0 +1,22 @@
+name:CI
+on: 
+  push:
+    branches:
+      -main
+      -develop
+  pull_request:
+    branches:
+      -main
+      -develop
+jobs:
+  tests: 
+    steps: 
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: instalar Node JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: verificar Node 
+        run: node -v
+        
