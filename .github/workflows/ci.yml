@@ -23,6 +23,66 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: npm
+          cache-dependency-path: |
+            backend/package-lock.json
+            cliente/package-lock.json
+            admin-client/package-lock.json
 
       - name: Verificar Node
         run: node -v
+
+      # ---------------- BACKEND ----------------
+      - name: Instalar dependencias backend
+        working-directory: backend
+        run: npm ci
+
+      - name: Lint backend
+        working-directory: backend
+        run: npm run lint
+
+      - name: Typecheck backend
+        working-directory: backend
+        run: npm run typecheck
+
+      - name: Build backend
+        working-directory: backend
+        run: npm run build
+
+      - name: Prisma validate
+        working-directory: backend
+        run: npx prisma validate
+
+      # ---------------- CLIENTE ----------------
+      - name: Instalar dependencias cliente
+        working-directory: cliente
+        run: npm ci
+
+      - name: Lint cliente
+        working-directory: cliente
+        run: npm run lint
+
+      - name: Typecheck cliente
+        working-directory: cliente
+        run: npm run typecheck
+
+      - name: Build cliente
+        working-directory: cliente
+        run: npm run build
+
+      # ---------------- ADMIN ----------------
+      - name: Instalar dependencias admin
+        working-directory: admin-client
+        run: npm ci
+
+      - name: Lint admin
+        working-directory: admin-client
+        run: npm run lint
+
+      - name: Typecheck admin
+        working-directory: admin-client
+        run: npm run typecheck
+
+      - name: Build admin
+        working-directory: admin-client
+        run: npm run build
