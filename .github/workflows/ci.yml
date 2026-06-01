@@ -1,25 +1,28 @@
-name:CI
-on: 
+name: CI
+
+on:
   push:
     branches:
-      -main
-      -feature/CI
-      
-     
+      - main
+      - feature/CI
+
   pull_request:
     branches:
-      -main
-      -feature/CI
-     
+      - main
+      - feature/CI
+
 jobs:
-  tests: 
-    steps: 
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
-      - name: instalar Node JS
+
+      - name: Instalar Node JS
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      - name: verificar Node 
-        run: node -v
+          node-version: "20"
 
+      - name: Verificar Node
+        run: node -v
