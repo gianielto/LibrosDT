@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
-import { parse } from "path";
 
 const getAllEmpleados = async (
   req: Request,
@@ -91,8 +90,8 @@ const deleteEmpleado = async (
       message: "Empleado deleted successfully",
       Empleado: deleteEmpleado,
     });
-  } catch (error: any) {
-    if (error.code === "P2025") {
+  } catch (error: unknown) {
+    if ((error as { code: string }).code === "P2025") {
       return res.status(404).json({ error: "Empleado not found" });
     }
     next(error);
@@ -131,8 +130,8 @@ const updateEmpleado = async (
       },
     });
     return res.json(updateEmpleado);
-  } catch (error: any) {
-    if (error.code === "P2025") {
+  } catch (error: unknown) {
+    if ((error as { code: string }).code === "P2025") {
       return res.status(404).json({ error: "Empleado not found" });
     }
     next(error);

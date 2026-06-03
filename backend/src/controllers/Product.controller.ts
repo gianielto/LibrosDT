@@ -1,7 +1,6 @@
 // Product.controller.ts
 import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
-import { parse } from "path";
 
 const getAllProduct = async (
   req: Request,
