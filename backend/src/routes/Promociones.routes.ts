@@ -1,11 +1,11 @@
 import { Request, Response, Router } from "express";
-const {
+import {
   getAllPromociones,
   getPromocion,
   createPromocion,
   deletePromocion,
   updatePromocion,
-} = require("../controllers/Promociones.controller");
+} from "../controllers/Promociones.controller";
 
 const router = Router();
 
@@ -23,4 +23,4 @@ router.get("/", (req: Request, res: Response) => {
   res.send("Welcome to the Promocion API");
 });
 
-module.exports = router;
+export default router;

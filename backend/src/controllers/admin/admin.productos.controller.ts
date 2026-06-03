@@ -4,11 +4,7 @@ import prisma from "../../lib/prisma";
 import cloudinary from "../../lib/cloudinary";
 
 // ─── Listar todos los productos (con categoría) ───────────────────────────────
-export const adminGetProductos = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminGetProductos = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 20;
@@ -81,11 +77,7 @@ export const adminGetProductos = async (
 };
 
 // ─── Obtener un producto por ID ───────────────────────────────────────────────
-export const adminGetProducto = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminGetProducto = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -120,22 +112,10 @@ export const adminGetProducto = async (
 };
 
 // ─── Crear producto ───────────────────────────────────────────────────────────
-export const adminCrearProducto = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminCrearProducto = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const {
-      nombre,
-      codigo,
-      descripcion,
-      costo,
-      stock,
-      id_categoria,
-      id_editorial,
-      autores,
-    } = req.body;
+    const { nombre, codigo, descripcion, costo, stock, id_categoria, id_editorial, autores } =
+      req.body;
     let autoresIds: number[] = [];
 
     if (autores) {
@@ -238,27 +218,15 @@ export const adminCrearProducto = async (
 };
 
 // ─── Actualizar producto ──────────────────────────────────────────────────────
-export const adminActualizarProducto = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminActualizarProducto = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
       return res.status(400).json({ message: "ID inválido" });
     }
 
-    const {
-      nombre,
-      codigo,
-      descripcion,
-      costo,
-      stock,
-      id_categoria,
-      id_editorial,
-      autores,
-    } = req.body;
+    const { nombre, codigo, descripcion, costo, stock, id_categoria, id_editorial, autores } =
+      req.body;
     let autoresIds: number[] = [];
 
     if (autores) {
@@ -357,11 +325,7 @@ export const adminActualizarProducto = async (
 };
 
 // ─── Eliminar producto (soft delete) ─────────────────────────────────────────
-export const adminEliminarProducto = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminEliminarProducto = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -391,11 +355,7 @@ export const adminEliminarProducto = async (
 };
 
 // ─── CRUD de categorías ───────────────────────────────────────────────────────
-export const adminGetCategorias = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminGetCategorias = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const categorias = await prisma.categorias.findMany({
       where: { eliminado: false },
@@ -407,11 +367,7 @@ export const adminGetCategorias = async (
   }
 };
 
-export const adminCrearCategoria = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminCrearCategoria = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { nombre, slug } = req.body;
 
@@ -424,20 +380,13 @@ export const adminCrearCategoria = async (
     });
 
     return res.status(201).json(categoria);
-  } catch (error: any) {
-    if (error.code === "P2002") {
-      return res.status(400).json({ message: "El slug ya existe" });
-    }
+  } catch (error) {
     next(error);
   }
 };
 
 // ─── CRUD de Editoriales ───────────────────────────────────────────────────────
-export const adminGetEditoriales = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminGetEditoriales = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const editoriales = await prisma.editoriales.findMany({
       where: { eliminado: false },
@@ -449,11 +398,7 @@ export const adminGetEditoriales = async (
   }
 };
 
-export const adminCrearEditorial = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminCrearEditorial = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { nombre, slug } = req.body;
 
@@ -466,10 +411,7 @@ export const adminCrearEditorial = async (
     });
 
     return res.status(201).json(editorial);
-  } catch (error: any) {
-    if (error.code === "P2002") {
-      return res.status(400).json({ message: "El slug ya existe" });
-    }
+  } catch (error) {
     next(error);
   }
 };
@@ -492,11 +434,7 @@ export const adminCrearEditorial = async (
 //     next(error);
 //   }
 // };
-export const adminGetAutores = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminGetAutores = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const search = req.query.search as string;
 
@@ -520,11 +458,7 @@ export const adminGetAutores = async (
   }
 };
 
-export const adminCrearAutor = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminCrearAutor = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { nombre, slug, fecha_nacimiento, nacionalidad } = req.body;
 
@@ -538,18 +472,13 @@ export const adminCrearAutor = async (
       data: {
         nombre,
         slug,
-        fecha_nacimiento: fecha_nacimiento
-          ? new Date(fecha_nacimiento)
-          : undefined,
+        fecha_nacimiento: fecha_nacimiento ? new Date(fecha_nacimiento) : undefined,
         nacionalidad,
       },
     });
 
     return res.status(201).json(autor);
-  } catch (error: any) {
-    if (error.code === "P2002") {
-      return res.status(400).json({ message: "El slug ya existe" });
-    }
+  } catch (error) {
     next(error);
   }
 };

@@ -1,10 +1,7 @@
 // Archivo: backend/src/routes/admin.routes.ts
 import { Router } from "express";
 import multer from "multer";
-import {
-  adminLogin,
-  adminMe,
-} from "../controllers/admin/admin.auth.controller";
+import { adminLogin, adminMe } from "../controllers/admin/admin.auth.controller";
 import { adminMiddleware } from "../middleware/admin.middleware";
 import {
   adminGetProductos,
@@ -57,18 +54,8 @@ router.get("/dashboard", adminMiddleware, adminDashboard);
 // ── Productos ─────────────────────────────────────────────────────────────────
 router.get("/productos", adminMiddleware, adminGetProductos);
 router.get("/productos/:id", adminMiddleware, adminGetProducto);
-router.post(
-  "/productos",
-  adminMiddleware,
-  upload.single("imagen"),
-  adminCrearProducto,
-);
-router.put(
-  "/productos/:id",
-  adminMiddleware,
-  upload.single("imagen"),
-  adminActualizarProducto,
-);
+router.post("/productos", adminMiddleware, upload.single("imagen"), adminCrearProducto);
+router.put("/productos/:id", adminMiddleware, upload.single("imagen"), adminActualizarProducto);
 router.delete("/productos/:id", adminMiddleware, adminEliminarProducto);
 
 // ── Categorías ────────────────────────────────────────────────────────────────
@@ -92,10 +79,6 @@ router.delete("/clientes/:id", adminMiddleware, adminEliminarCliente);
 // ── Pedidos ───────────────────────────────────────────────────────────────────
 router.get("/pedidos", adminMiddleware, adminGetPedidos);
 router.get("/pedidos/:id", adminMiddleware, adminGetPedido);
-router.patch(
-  "/pedidos/:id/status",
-  adminMiddleware,
-  adminActualizarStatusPedido,
-);
+router.patch("/pedidos/:id/status", adminMiddleware, adminActualizarStatusPedido);
 
 export default router;

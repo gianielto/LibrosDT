@@ -48,7 +48,7 @@ router.post("/subscribe", async (req: Request, res: Response) => {
     });
 
     res.status(201).json({ message: "Suscripción guardada" });
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: "Error guardando suscripción" });
   }
 });
@@ -77,7 +77,7 @@ router.post("/notify/:userId", async (req: Request, res: Response) => {
 
     await webpush.sendNotification(subscription, payload);
     res.json({ message: "Notificación enviada" });
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: "Error enviando notificación" });
   }
 });

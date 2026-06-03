@@ -2,11 +2,7 @@ import { verify } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import prisma from "../lib/prisma";
 
-export const authMiddleware = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
   // console.log("Token recibido en middleware:", token);
   if (!token) {
@@ -28,7 +24,7 @@ export const authMiddleware = async (
 
     req.client = client;
     next();
-  } catch (error) {
+  } catch {
     return res.status(401).json({ message: "Invalid token" });
   }
 };

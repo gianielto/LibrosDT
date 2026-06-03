@@ -1,13 +1,13 @@
-const { Router } = require("express");
+import { Router } from "express";
 import { Request, Response } from "express";
 //const pool = require("../db");
-const {
+import {
   getAllClient,
   getClient,
   createClient,
   deleteClient,
   updateClient,
-} = require("../controllers/client.controller");
+} from "../controllers/client.controller";
 
 const router = Router();
 
@@ -25,4 +25,4 @@ router.get("/", (req: Request, res: Response) => {
   res.send("Welcome to the Client API");
 });
 
-module.exports = router;
+export default router;

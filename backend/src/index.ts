@@ -50,21 +50,23 @@
 // app.listen(PORT, () => {
 //   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 // });
-import { Request, Response, NextFunction } from "express";
+// import { Request, Response, NextFunction } from "express";
 import cookieParser from "cookie-parser";
 import adminRoutes from "./routes/admin.routes"; // ← añadido
 
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
-const ClientesRoutes = require("./routes/clientes.routes");
-const ProductsRoutes = require("./routes/productos.routes");
-const EmpleadosRoutes = require("./routes/empleados.routes");
-const PromocionesRoutes = require("./routes/Promociones.routes");
+import express from "express";
+import cors from "cors";
+import morgan from "morgan";
+import ClientesRoutes from "./routes/clientes.routes";
+import ProductsRoutes from "./routes/productos.routes";
+import EmpleadosRoutes from "./routes/empleados.routes";
+import PromocionesRoutes from "./routes/Promociones.routes";
 import PushRoutes from "./routes/push.Routes";
 import cartRoutes from "./routes/cart.routes";
 import auth from "./routes/auth.routes";
 import dotenv from "dotenv";
+import { errorHandler } from "./middleware/errorHandler";
+
 dotenv.config();
 
 const app = express();
@@ -94,11 +96,13 @@ app.use(PromocionesRoutes);
 
 app.use("/push", PushRoutes);
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  return res.json({
-    message: err.message,
+app.use("*", (req, res) => {
+  res.status(404).json({
+    error: "Route not found",
   });
 });
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

@@ -1,14 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
-import { parse } from "path";
 
 import bcrypt from "bcrypt";
 
-const getAllClient = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getAllClient = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const clientes = await prisma.clientes.findMany();
 
@@ -18,7 +13,7 @@ const getAllClient = async (
   }
 };
 
-const getClient = async (req: Request, res: Response, next: NextFunction) => {
+export const getClient = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
 
@@ -38,11 +33,7 @@ const getClient = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export const createClient = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const createClient = async (req: Request, res: Response, next: NextFunction) => {
   const { nombre, apellidos, correo, pass, telefono, direccion } = req.body;
   const SALT_ROUNDS = 10;
   try {
@@ -65,21 +56,15 @@ export const createClient = async (
       },
     });
 
-    const { pass: _, ...clientWithoutPassword } = newClient;
+    const { ...clientWithoutPassword } = newClient;
 
     res.status(201).json(clientWithoutPassword);
-  } catch (error: any) {
-    res.status(500).json({
-      message: "Error al crear cliente",
-    });
+  } catch (error) {
+    next(error);
   }
 };
 
-const deleteClient = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const deleteClient = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id;
 
@@ -89,22 +74,13 @@ const deleteClient = async (
     if (!deleteClient) {
       return res.status(404).json({ error: "Client not found" });
     }
-    return res
-      .status(204)
-      .json({ message: "Client deleted successfully", client: deleteClient });
-  } catch (error: any) {
-    if (error.code === "P2025") {
-      return res.status(404).json({ error: "Client not found" });
-    }
+    return res.status(204).json({ message: "Client deleted successfully", client: deleteClient });
+  } catch (error) {
     next(error);
   }
 };
 
-const updateClient = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const updateClient = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const { nombre, apellidos, correo, pass, telefono, direccion } = req.body;
@@ -114,18 +90,7 @@ const updateClient = async (
       data: { nombre, apellidos, correo, pass, telefono, direccion },
     });
     return res.json(updateClient);
-  } catch (error: any) {
-    if (error.code === "P2025") {
-      return res.status(404).json({ error: "Client not found" });
-    }
+  } catch (error) {
     next(error);
   }
-};
-
-module.exports = {
-  getAllClient,
-  getClient,
-  createClient,
-  deleteClient,
-  updateClient,
 };

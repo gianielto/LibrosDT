@@ -2,11 +2,7 @@ import { verify } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import prisma from "../lib/prisma";
 
-export const adminMiddleware = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
@@ -40,6 +36,7 @@ export const adminMiddleware = async (
 
     next();
   } catch (error) {
+    next(error);
     return res.status(401).json({ message: "Token inválido o expirado" });
   }
 };

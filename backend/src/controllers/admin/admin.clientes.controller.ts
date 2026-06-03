@@ -2,11 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import prisma from "../../lib/prisma";
 
 // ─── Listar clientes ──────────────────────────────────────────────────────────
-export const adminGetClientes = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminGetClientes = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 20;
@@ -59,11 +55,7 @@ export const adminGetClientes = async (
 };
 
 // ─── Obtener un cliente con sus pedidos ───────────────────────────────────────
-export const adminGetCliente = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminGetCliente = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -104,11 +96,7 @@ export const adminGetCliente = async (
 };
 
 // ─── Actualizar cliente ───────────────────────────────────────────────────────
-export const adminActualizarCliente = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminActualizarCliente = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -132,23 +120,13 @@ export const adminActualizarCliente = async (
     });
 
     return res.json(cliente);
-  } catch (error: any) {
-    if (error.code === "P2025") {
-      return res.status(404).json({ message: "Cliente no encontrado" });
-    }
-    if (error.code === "P2002") {
-      return res.status(400).json({ message: "El correo ya está registrado" });
-    }
+  } catch (error) {
     next(error);
   }
 };
 
 // ─── Soft delete de cliente ───────────────────────────────────────────────────
-export const adminEliminarCliente = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminEliminarCliente = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {

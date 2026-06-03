@@ -1,17 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
-import { parse } from "path";
-import {
-  findActiveCart,
-  getCartItems,
-  getOrCreateCart,
-} from "../services/cart.services";
 
-export const removeFromCart = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+import { findActiveCart, getCartItems, getOrCreateCart } from "../services/cart.services";
+
+export const removeFromCart = async (req: Request, res: Response) => {
   if (!req.client) {
     return res.status(401).json({ message: "No autorizado" });
   }
@@ -43,11 +35,7 @@ export const removeFromCart = async (
   console.log("Producto eliminado del carrito");
 };
 
-export const getCart = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getCart = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (!req.client) {
       return res.status(401).json({ message: "No autorizado" });
@@ -60,11 +48,7 @@ export const getCart = async (
     next(error);
   }
 };
-export const addToCart = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const addToCart = async (req: Request, res: Response) => {
   if (!req.client) {
     return res.status(401).json({ message: "No autorizado" });
   }
@@ -96,9 +80,7 @@ export const addToCart = async (
       return res.status(400).json({ message: "Producto sin stock disponible" });
     }
     if (nuevaCantidad > producto.stock) {
-      return res
-        .status(400)
-        .json({ message: "Cantidad excede el stock disponible" });
+      return res.status(400).json({ message: "Cantidad excede el stock disponible" });
     }
 
     await prisma.pedidos_productos.update({
@@ -119,11 +101,7 @@ export const addToCart = async (
   res.json({ message: "Producto agregado" });
 };
 
-export const updateCartItem = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const updateCartItem = async (req: Request, res: Response) => {
   if (!req.client) {
     return res.status(401).json({ message: "No autorizado" });
   }

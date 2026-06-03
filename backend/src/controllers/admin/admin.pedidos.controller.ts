@@ -10,19 +10,13 @@ const STATUS_LABELS: Record<number, string> = {
 };
 
 // ─── Listar pedidos confirmados ───────────────────────────────────────────────
-export const adminGetPedidos = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminGetPedidos = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 20;
     const skip = (page - 1) * limit;
     const status =
-      req.query.status !== undefined
-        ? parseInt(req.query.status as string)
-        : undefined;
+      req.query.status !== undefined ? parseInt(req.query.status as string) : undefined;
 
     // El admin solo ve pedidos confirmados (status > 0)
     // status=0 son carritos activos de clientes, no pedidos reales
@@ -91,11 +85,7 @@ export const adminGetPedidos = async (
 };
 
 // ─── Obtener un pedido con detalle completo ───────────────────────────────────
-export const adminGetPedido = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminGetPedido = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -211,40 +201,35 @@ export const adminActualizarStatusPedido = async (
 };
 
 // ─── Resumen para el dashboard ────────────────────────────────────────────────
-export const adminDashboard = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const adminDashboard = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const hoy = new Date();
     const inicioMes = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
 
-    const [pedidosMes, pedidosPorStatus, productosBajoStock, totalClientes] =
-      await Promise.all([
-        // Pedidos confirmados este mes
-        prisma.pedidos.findMany({
-          where: {
-            status: { gt: 0 },
-            fecha: { gte: inicioMes },
-          },
-          include: { pedidos_productos: true },
-        }),
-        // Conteo por status
-        prisma.pedidos.groupBy({
-          by: ["status"],
-          where: { status: { gt: 0 } },
-          _count: { id: true },
-        }),
-        // Productos con stock bajo (menos de 5 unidades)
-        prisma.productos.findMany({
-          where: { eliminado: false, stock: { lte: 5 } },
-          select: { id: true, nombre: true, codigo: true, stock: true },
-          orderBy: { stock: "asc" },
-        }),
-        // Total de clientes activos
-        prisma.clientes.count({ where: { eliminado: false } }),
-      ]);
+    const [pedidosMes, pedidosPorStatus, productosBajoStock, totalClientes] = await Promise.all([
+      // Pedidos confirmados este mes
+      prisma.pedidos.findMany({
+        where: {
+          status: { gt: 0 },
+          fecha: { gte: inicioMes },
+        },
+        include: { pedidos_productos: true },
+      }),
+      // Conteo por status
+      prisma.pedidos.groupBy({
+        by: ["status"],
+        where: { status: { gt: 0 } },
+        _count: { id: true },
+      }),
+      // Productos con stock bajo (menos de 5 unidades)
+      prisma.productos.findMany({
+        where: { eliminado: false, stock: { lte: 5 } },
+        select: { id: true, nombre: true, codigo: true, stock: true },
+        orderBy: { stock: "asc" },
+      }),
+      // Total de clientes activos
+      prisma.clientes.count({ where: { eliminado: false } }),
+    ]);
 
     // Calcular ventas del mes
     const ventasMes = pedidosMes.reduce((sum, pedido) => {

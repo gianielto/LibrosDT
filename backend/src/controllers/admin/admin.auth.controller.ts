@@ -55,7 +55,7 @@ export const adminLogin = async (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    console.error(error); // 👈 ESTO ES CLAVE
+    console.error(error);
     return res.status(500).json({
       message: "Error interno del servidor",
       error: error instanceof Error ? error.message : error,

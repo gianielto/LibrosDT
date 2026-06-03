@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma";
 import bcrypt from "bcrypt";
 
-const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response) => {
   const { correo, pass } = req.body;
 
   if (!correo || !pass) {
@@ -33,7 +33,7 @@ const login = async (req: Request, res: Response) => {
   });
   return res.json({ message: "Login exitoso" });
 };
-const getME = (req: Request, res: Response) => {
+export const getME = (req: Request, res: Response) => {
   if (!req.client) {
     return res.status(401).json({ message: "No autorizado" });
   }
@@ -44,7 +44,7 @@ const getME = (req: Request, res: Response) => {
     nombre: req.client.nombre,
   });
 };
-const logout = (req: Request, res: Response) => {
+export const logout = (req: Request, res: Response) => {
   res.clearCookie("token", {
     httpOnly: true,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
@@ -52,9 +52,4 @@ const logout = (req: Request, res: Response) => {
   });
 
   return res.json({ message: "Logout exitoso" });
-};
-module.exports = {
-  login,
-  getME,
-  logout,
 };

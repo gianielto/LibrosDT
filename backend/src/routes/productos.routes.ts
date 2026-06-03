@@ -1,11 +1,11 @@
 import { Request, Response, Router } from "express";
-const {
+import {
   getAllProduct,
   getProduct,
   createProduct,
   deleteProduct,
   updateProduct,
-} = require("../controllers/Product.controller");
+} from "../controllers/Product.controller";
 
 const router = Router();
 
@@ -23,4 +23,4 @@ router.get("/", (req: Request, res: Response) => {
   res.send("Welcome to the Product API");
 });
 
-module.exports = router;
+export default router;

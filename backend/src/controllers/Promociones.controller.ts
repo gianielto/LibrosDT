@@ -1,12 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
-import { parse } from "path";
 
-const getAllPromociones = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getAllPromociones = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const Promociones = await prisma.promociones.findMany({
       where: { eliminado: false, status: 1 },
@@ -18,11 +13,7 @@ const getAllPromociones = async (
   }
 };
 
-const getPromocion = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getPromocion = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
 
@@ -42,11 +33,7 @@ const getPromocion = async (
   }
 };
 
-const createPromocion = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const createPromocion = async (req: Request, res: Response, next: NextFunction) => {
   const { nombre, archivo, status } = req.body;
 
   try {
@@ -63,11 +50,7 @@ const createPromocion = async (
   }
 };
 
-const deletePromocion = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const deletePromocion = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id;
 
@@ -82,19 +65,12 @@ const deletePromocion = async (
       message: "Promocion deleted successfully",
       Promocion: deletePromocion,
     });
-  } catch (error: any) {
-    if (error.code === "P2025") {
-      return res.status(404).json({ error: "Promocion not found" });
-    }
+  } catch (error) {
     next(error);
   }
 };
 
-const updatePromocion = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const updatePromocion = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const { nombre, archivo, status } = req.body;
@@ -108,18 +84,7 @@ const updatePromocion = async (
       },
     });
     return res.json(updatePromocion);
-  } catch (error: any) {
-    if (error.code === "P2025") {
-      return res.status(404).json({ error: "Promocion not found" });
-    }
+  } catch (error) {
     next(error);
   }
-};
-
-module.exports = {
-  getAllPromociones,
-  getPromocion,
-  createPromocion,
-  deletePromocion,
-  updatePromocion,
 };

@@ -1,12 +1,12 @@
 import { Request, Response, Router } from "express";
 //const pool = require("../db");
-const {
+import {
   getAllEmpleados,
   getEmpleado,
   createEmpleado,
   deleteEmpleado,
   updateEmpleado,
-} = require("../controllers/Empleado.controller");
+} from "../controllers/Empleado.controller";
 
 const router = Router();
 
@@ -24,4 +24,4 @@ router.get("/", (req: Request, res: Response) => {
   res.send("Welcome to the Empleado API");
 });
 
-module.exports = router;
+export default router;

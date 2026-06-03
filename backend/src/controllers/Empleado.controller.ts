@@ -1,11 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
 
-const getAllEmpleados = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getAllEmpleados = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const Empleados = await prisma.empleados.findMany();
     res.json(Empleados);
@@ -14,7 +10,7 @@ const getAllEmpleados = async (
   }
 };
 
-const getEmpleado = async (req: Request, res: Response, next: NextFunction) => {
+export const getEmpleado = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
 
@@ -34,22 +30,9 @@ const getEmpleado = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const createEmpleado = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  const {
-    id,
-    nombre,
-    apellidos,
-    correo,
-    pass,
-    rol,
-    archivo_url,
-    cloudinary_id,
-    eliminado,
-  } = req.body;
+export const createEmpleado = async (req: Request, res: Response, next: NextFunction) => {
+  const { id, nombre, apellidos, correo, pass, rol, archivo_url, cloudinary_id, eliminado } =
+    req.body;
 
   try {
     const newEmpleado = await prisma.empleados.create({
@@ -71,11 +54,7 @@ const createEmpleado = async (
   }
 };
 
-const deleteEmpleado = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const deleteEmpleado = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id;
 
@@ -98,23 +77,11 @@ const deleteEmpleado = async (
   }
 };
 
-const updateEmpleado = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const updateEmpleado = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const {
-      nombre,
-      apellidos,
-      correo,
-      pass,
-      rol,
-      archivo_url,
-      cloudinary_id,
-      eliminado,
-    } = req.body;
+    const { nombre, apellidos, correo, pass, rol, archivo_url, cloudinary_id, eliminado } =
+      req.body;
 
     const updateEmpleado = await prisma.empleados.update({
       where: { id: Number(id) },
@@ -136,12 +103,4 @@ const updateEmpleado = async (
     }
     next(error);
   }
-};
-
-module.exports = {
-  getAllEmpleados,
-  getEmpleado,
-  createEmpleado,
-  deleteEmpleado,
-  updateEmpleado,
 };

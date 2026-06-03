@@ -2,11 +2,7 @@
 import { Request, Response, NextFunction } from "express";
 import prisma from "../prisma";
 
-const getAllProduct = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getAllProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const Product = await prisma.productos.findMany({
       where: { eliminado: false },
@@ -27,7 +23,7 @@ const getAllProduct = async (
   }
 };
 
-const getProduct = async (req: Request, res: Response, next: NextFunction) => {
+export const getProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
 
@@ -56,13 +52,8 @@ const getProduct = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const createProduct = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  const { id, nombre, codigo, descripcion, costo, stock, archivo_n, archivo } =
-    req.body;
+export const createProduct = async (req: Request, res: Response, next: NextFunction) => {
+  const { id, nombre, codigo, descripcion, costo, stock, archivo_n, archivo } = req.body;
 
   try {
     const newProduct = await prisma.productos.create({
@@ -83,11 +74,7 @@ const createProduct = async (
   }
 };
 
-const deleteProduct = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id;
 
@@ -102,23 +89,15 @@ const deleteProduct = async (
       message: "Product deleted successfully",
       Product: deleteProduct,
     });
-  } catch (error: any) {
-    if (error.code === "P2025") {
-      return res.status(404).json({ error: "Product not found" });
-    }
+  } catch (error) {
     next(error);
   }
 };
 
-const updateProduct = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const updateProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const { nombre, codigo, descripcion, costo, stock, archivo_n, archivo } =
-      req.body;
+    const { nombre, codigo, descripcion, costo, stock, archivo_n, archivo } = req.body;
 
     const updateProduct = await prisma.productos.update({
       where: { id: Number(id) },
@@ -133,18 +112,7 @@ const updateProduct = async (
       },
     });
     return res.json(updateProduct);
-  } catch (error: any) {
-    if (error.code === "P2025") {
-      return res.status(404).json({ error: "Product not found" });
-    }
+  } catch (error) {
     next(error);
   }
-};
-
-module.exports = {
-  getAllProduct,
-  getProduct,
-  createProduct,
-  deleteProduct,
-  updateProduct,
 };
