@@ -50,9 +50,7 @@ const Carrito = () => {
       credentials: "include",
     });
 
-    setItems((prevItems) =>
-      prevItems.filter((item) => item.producto.id !== productoId),
-    );
+    setItems((prevItems) => prevItems.filter((item) => item.producto.id !== productoId));
   };
 
   const handleUpdate = async (productoId: number, cantidad: number) => {
@@ -64,9 +62,7 @@ const Carrito = () => {
     });
 
     setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.producto.id === productoId ? { ...item, cantidad } : item,
-      ),
+      prevItems.map((item) => (item.producto.id === productoId ? { ...item, cantidad } : item)),
     );
   };
   return (
@@ -78,10 +74,7 @@ const Carrito = () => {
           title={item.producto.nombre}
           codigo={item.producto.codigo}
           // imagen={`/imagenes/productos/${item.producto.imagen}`}
-          imagen={
-            item.producto.imagen_url ||
-            `/imagenes/productos/${item.producto.imagen}`
-          }
+          imagen={item.producto.imagen_url || `/imagenes/productos/${item.producto.imagen}`}
           precio={item.producto.precio}
           cantidadInicial={item.cantidad}
           stock={item.producto.stock}
@@ -91,18 +84,13 @@ const Carrito = () => {
           //     ?.map((pa) => pa.autor.nombre)
           //     .join(", ") || "Sin autor"
           // }
-          autor={
-            item.producto.autor?.map((a) => a.nombre).join(", ") || "Sin autor"
-          }
+          autor={item.producto.autor?.map((a) => a.nombre).join(", ") || "Sin autor"}
           onRemove={handleRemove}
           onUpdate={handleUpdate}
         />
       ))}
       <CartTotal
-        total={items.reduce(
-          (acc, item) => acc + item.producto.precio * item.cantidad,
-          0,
-        )}
+        total={items.reduce((acc, item) => acc + item.producto.precio * item.cantidad, 0)}
       />
     </div>
   );

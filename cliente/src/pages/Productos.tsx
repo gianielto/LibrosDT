@@ -35,9 +35,7 @@ export default function Productos({ numberOfProducts }: ProductosProps) {
         const data = await res.json();
         console.log("Fetched books:", data);
         if (numberOfProducts) {
-          const randomFive = data
-            .sort(() => Math.random() - 0.4)
-            .slice(0, numberOfProducts);
+          const randomFive = data.sort(() => Math.random() - 0.4).slice(0, numberOfProducts);
           setbooks(randomFive);
         } else {
           setbooks(data);
@@ -63,10 +61,7 @@ export default function Productos({ numberOfProducts }: ProductosProps) {
           // stock={book.stock}
           editorial={book.editorial?.nombre || "Sin editorial"}
           // autor={book.productos_autores?.[0]?.autor?.nombre || "Sin autor"}
-          autor={
-            book.productos_autores?.map((pa) => pa.autor.nombre).join(", ") ||
-            "Sin autor"
-          }
+          autor={book.productos_autores?.map((pa) => pa.autor.nombre).join(", ") || "Sin autor"}
         />
       ))}
     </GridBook>

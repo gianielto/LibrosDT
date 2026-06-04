@@ -93,11 +93,7 @@ const CartItem: React.FC<CartItemProps> = ({
           // icon={<span>🗑️</span>}
 
           icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 40 40"
-              className="icon-svg"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" className="icon-svg">
               <path
                 fill="#8b75a1"
                 d="M24.279,3l0.667,2h-9.892l0.667-2H24.279 M24.279,2h-8.558c-0.43,0-0.813,0.275-0.949,0.684L14,5v1h12V5l-0.772-2.316C25.092,2.275,24.71,2,24.279,2z"

@@ -6,8 +6,7 @@ import "./BellButton.css";
 const BellButton = () => {
   const { user } = useAuth();
   const { isSubscribed, subscribe } = usePushNotifications();
-  const [permissionState, setPermissionState] =
-    useState<NotificationPermission>("default");
+  const [permissionState, setPermissionState] = useState<NotificationPermission>("default");
 
   // Al montar verificamos si el usuario ya había dado permiso antes
   useEffect(() => {
@@ -45,9 +44,7 @@ const BellButton = () => {
     <button
       className={`bell-btn ${isSubscribed || permissionState === "granted" ? "bell-btn--active" : ""}`}
       onClick={handleClick}
-      title={
-        isSubscribed ? "Notificaciones activadas" : "Activar notificaciones"
-      }
+      title={isSubscribed ? "Notificaciones activadas" : "Activar notificaciones"}
     >
       {isSubscribed || permissionState === "granted" ? "🔔" : "🔕"}
     </button>

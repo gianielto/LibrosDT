@@ -36,9 +36,7 @@ const BarraInfo: React.FC = () => {
 
       <div>
         <div className="titulo fuenteClaro">Términos y condiciones</div>
-        <p className="fuenteClaro derecha">
-          Todos los derechos reservados ® librerías DT
-        </p>
+        <p className="fuenteClaro derecha">Todos los derechos reservados ® librerías DT</p>
       </div>
     </div>
   );

@@ -9,11 +9,7 @@ type ButtonLinkProps = LinkProps & {
   className?: string;
 };
 
-const ButtonLink: React.FC<ButtonLinkProps> = ({
-  children,
-  className = "",
-  ...rest
-}) => {
+const ButtonLink: React.FC<ButtonLinkProps> = ({ children, className = "", ...rest }) => {
   return (
     <Link {...rest} className={`button-link ${className}`}>
       {children}

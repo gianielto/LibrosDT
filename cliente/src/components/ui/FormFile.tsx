@@ -7,14 +7,7 @@ interface FormFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FormField: React.FC<FormFieldProps> = ({
-  label,
-  type,
-  value,
-  name,
-  htmlfor,
-  onChange,
-}) => (
+const FormField: React.FC<FormFieldProps> = ({ label, type, value, name, htmlfor, onChange }) => (
   <>
     <label htmlFor={htmlfor}>{label}</label>
     <input type={type} value={value} name={name} onChange={onChange} />

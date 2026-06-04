@@ -39,9 +39,7 @@ export default function ProductoDetalle() {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/Product/${codigo}`,
-        );
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/Product/${codigo}`);
         const data = await res.json();
         setBook(data);
       } catch (error) {
@@ -97,10 +95,7 @@ export default function ProductoDetalle() {
   return (
     <div className="detalle-container">
       <div className="detalle-imagen">
-        <img
-          src={book.archivo_url || `/imagenes/productos/${book.archivo}`}
-          alt={book.nombre}
-        />
+        <img src={book.archivo_url || `/imagenes/productos/${book.archivo}`} alt={book.nombre} />
       </div>
 
       <div className="detalle-info">
@@ -121,16 +116,13 @@ export default function ProductoDetalle() {
               ? "Autores: "
               : "Autor: "}
           </strong>
-          {book.productos_autores?.map((pa) => pa.autor.nombre).join(", ") ||
-            "Sin autor"}
+          {book.productos_autores?.map((pa) => pa.autor.nombre).join(", ") || "Sin autor"}
         </p>
         <p>
-          <strong>Editorial:</strong>{" "}
-          {book.editorial?.nombre || "Sin editorial"}
+          <strong>Editorial:</strong> {book.editorial?.nombre || "Sin editorial"}
         </p>
         <p>
-          <strong>Categoría:</strong>{" "}
-          {book.categoria?.nombre || "Sin categoría"}
+          <strong>Categoría:</strong> {book.categoria?.nombre || "Sin categoría"}
         </p>
 
         <h2>Descripción</h2>
@@ -146,9 +138,7 @@ export default function ProductoDetalle() {
                 value={quantity}
                 min={1}
                 max={MAX_STOCK}
-                onChange={(e) =>
-                  setQuantity(Math.max(1, Number(e.target.value)))
-                }
+                onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
               />
 
               <Btn1 onClick={() => handleChange("+")}>+</Btn1>

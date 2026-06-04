@@ -70,9 +70,7 @@ const CardBook: React.FC<CardBookProps> = ({
         {stock !== undefined && stock !== null && (
           <p className="card-book-code">codigo: {codigo}</p>
         )}
-        {stock !== undefined && stock !== null && (
-          <p className="card-book-stock">stock: {stock}</p>
-        )}
+        {stock !== undefined && stock !== null && <p className="card-book-stock">stock: {stock}</p>}
 
         <p className="card-book-autor">
           {autor?.includes(", ") ? "Autores: " : "Autor: "}

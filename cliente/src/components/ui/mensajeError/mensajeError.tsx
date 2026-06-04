@@ -7,11 +7,7 @@ interface MensajeErrorProps {
   onClose: () => void;
 }
 
-const MensajeError: React.FC<MensajeErrorProps> = ({
-  mensaje,
-  duracion = 5000,
-  onClose,
-}) => {
+const MensajeError: React.FC<MensajeErrorProps> = ({ mensaje, duracion = 5000, onClose }) => {
   useEffect(() => {
     if (!mensaje) return;
 

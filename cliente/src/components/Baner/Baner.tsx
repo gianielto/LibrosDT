@@ -12,8 +12,7 @@ const Baner: React.FC = () => {
         const randomFive = data.sort(() => Math.random() - 0.4).slice(0, 4);
 
         const bannerUrls = randomFive.map(
-          (promocion: { archivo: string }) =>
-            `/imagenes/promociones/archivos/${promocion.archivo}`,
+          (promocion: { archivo: string }) => `/imagenes/promociones/archivos/${promocion.archivo}`,
         );
         setBanners(bannerUrls);
       } catch (error) {

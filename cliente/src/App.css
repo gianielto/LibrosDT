@@ -356,10 +356,7 @@ textarea {
 .product-grid {
   width: 90%;
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(200px, 1fr)
-  ); /* Ajuste automático */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste automático */
   gap: 20px; /* Espaciado entre productos */
   padding: 20px; /* Espaciado interno */
   background-color: #f4f4f4; /* Fondo de la retícula */
@@ -378,7 +375,9 @@ textarea {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
   text-align: center; /* Centrar contenido */
   padding: 20px; /* Espaciado interno */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación al pasar el mouse 
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Animación al pasar el mouse 
     max-height: 400px;
     */
 }
@@ -512,7 +511,9 @@ a:visited {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
   text-align: center; /* Centrar contenido */
   padding: 20px; /* Espaciado interno */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación al pasar el mouse */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Animación al pasar el mouse */
 }
 
 .columna {

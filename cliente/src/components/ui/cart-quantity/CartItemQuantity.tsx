@@ -9,12 +9,7 @@ type Props = {
   setError: (value: string) => void;
 };
 
-const CartItemQuantity: React.FC<Props> = ({
-  cantidad,
-  handleChange,
-  error,
-  setError,
-}) => {
+const CartItemQuantity: React.FC<Props> = ({ cantidad, handleChange, error, setError }) => {
   return (
     <div className="cart-quantity">
       <h3>Cantidad</h3>

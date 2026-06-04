@@ -66,12 +66,7 @@ const LogIn: React.FC = () => {
             onChange={(e) => setCorreo(e.target.value)}
           />
           <label htmlFor="pass">Contraseña</label>
-          <input
-            type="password"
-            id="pass"
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
-          />
+          <input type="password" id="pass" value={pass} onChange={(e) => setPass(e.target.value)} />
         </div>
 
         <br />

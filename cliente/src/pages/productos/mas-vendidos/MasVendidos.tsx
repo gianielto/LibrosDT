@@ -96,31 +96,21 @@ export default function MasVendidos() {
     <section className="mas-vendidos">
       <div className="mas-vendidos-header">
         <h1 className="mas-vendidos-title">Más Vendidos</h1>
-        <p className="mas-vendidos-subtitle">
-          Los productos más populares y recomendados
-        </p>
+        <p className="mas-vendidos-subtitle">Los productos más populares y recomendados</p>
       </div>
 
       <div className="products-grid">
         {bestSellers.map((product) => (
           <article
             key={product.id}
-            className={`product-card ${
-              selectedProduct === product.id ? "selected" : ""
-            }`}
+            className={`product-card ${selectedProduct === product.id ? "selected" : ""}`}
             onClick={() => handleProductClick(product.id)}
             role="button"
             tabIndex={0}
           >
             <div className="product-image-container">
-              <img
-                src={product.image}
-                alt={product.title}
-                className="product-image"
-              />
-              {product.badge && (
-                <span className="product-badge">{product.badge}</span>
-              )}
+              <img src={product.image} alt={product.title} className="product-image" />
+              {product.badge && <span className="product-badge">{product.badge}</span>}
               <div className="product-overlay">
                 <button className="view-details-btn">Ver Detalles</button>
               </div>
@@ -134,9 +124,7 @@ export default function MasVendidos() {
                   {Array.from({ length: 5 }).map((_, i) => (
                     <svg
                       key={i}
-                      className={`star ${
-                        i < Math.floor(product.rating) ? "filled" : ""
-                      }`}
+                      className={`star ${i < Math.floor(product.rating) ? "filled" : ""}`}
                       viewBox="0 0 24 24"
                       fill="currentColor"
                     >
@@ -148,19 +136,12 @@ export default function MasVendidos() {
               </div>
 
               <div className="product-sales">
-                <span className="sales-count">
-                  {product.sales.toLocaleString()} vendidos
-                </span>
+                <span className="sales-count">{product.sales.toLocaleString()} vendidos</span>
               </div>
 
               <div className="product-footer">
-                <span className="product-price">
-                  ${product.price.toFixed(2)}
-                </span>
-                <button
-                  className="add-to-cart-btn"
-                  aria-label="Añadir al carrito"
-                >
+                <span className="product-price">${product.price.toFixed(2)}</span>
+                <button className="add-to-cart-btn" aria-label="Añadir al carrito">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path
                       d="M9 2L6.17 6H3l1.35 2.45.5.89v8.11A2 2 0 0 0 6.5 20h11a2 2 0 0 0 2-2v-8l.5-.89L21 6h-3.17L15 2H9z"

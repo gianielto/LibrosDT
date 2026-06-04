@@ -30,9 +30,7 @@ const RegistroUsuario: React.FC = () => {
   const [errorCorreo, setErrorCorreo] = useState<string>("");
   const [errorGeneral, setErrorGeneral] = useState<string>("");
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };

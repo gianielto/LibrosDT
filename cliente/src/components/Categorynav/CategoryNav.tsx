@@ -14,19 +14,8 @@ const categories: Category[] = [
     id: "MasVendidos",
     label: "Más Vendidos",
     icon: (
-      <svg
-        viewBox="0 0 56 56"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="cat-icon"
-      >
-        <circle
-          cx="28"
-          cy="22"
-          r="14"
-          stroke="currentColor"
-          strokeWidth="2.5"
-        />
+      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="cat-icon">
+        <circle cx="28" cy="22" r="14" stroke="currentColor" strokeWidth="2.5" />
         <path
           d="M28 8V22L35 15"
           stroke="currentColor"
@@ -40,12 +29,7 @@ const categories: Category[] = [
           strokeWidth="2.5"
           strokeLinecap="round"
         />
-        <path
-          d="M20 40H36"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
+        <path d="M20 40H36" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         <circle cx="28" cy="22" r="4" fill="currentColor" opacity="0.15" />
         <path
           d="M24 22L27 25L32 19"
@@ -61,21 +45,8 @@ const categories: Category[] = [
     id: "Novedades",
     label: "Novedades",
     icon: (
-      <svg
-        viewBox="0 0 56 56"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="cat-icon"
-      >
-        <rect
-          x="10"
-          y="14"
-          width="28"
-          height="36"
-          rx="3"
-          stroke="currentColor"
-          strokeWidth="2.5"
-        />
+      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="cat-icon">
+        <rect x="10" y="14" width="28" height="36" rx="3" stroke="currentColor" strokeWidth="2.5" />
         <rect
           x="16"
           y="8"
@@ -107,12 +78,7 @@ const categories: Category[] = [
     id: "frases",
     label: "Frases",
     icon: (
-      <svg
-        viewBox="0 0 56 56"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="cat-icon"
-      >
+      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="cat-icon">
         <path
           d="M10 16C10 14.3 11.3 13 13 13H38C39.7 13 41 14.3 41 16V34C41 35.7 39.7 37 38 37H30L24 44V37H13C11.3 37 10 35.7 10 34V16Z"
           stroke="currentColor"
@@ -136,66 +102,13 @@ const categories: Category[] = [
     id: "generos",
     label: "Géneros",
     icon: (
-      <svg
-        viewBox="0 0 56 56"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="cat-icon"
-      >
-        <rect
-          x="8"
-          y="32"
-          width="10"
-          height="16"
-          rx="2"
-          stroke="currentColor"
-          strokeWidth="2.5"
-        />
-        <rect
-          x="23"
-          y="22"
-          width="10"
-          height="26"
-          rx="2"
-          stroke="currentColor"
-          strokeWidth="2.5"
-        />
-        <rect
-          x="38"
-          y="14"
-          width="10"
-          height="34"
-          rx="2"
-          stroke="currentColor"
-          strokeWidth="2.5"
-        />
-        <rect
-          x="8"
-          y="32"
-          width="10"
-          height="16"
-          rx="2"
-          fill="currentColor"
-          opacity="0.12"
-        />
-        <rect
-          x="23"
-          y="22"
-          width="10"
-          height="26"
-          rx="2"
-          fill="currentColor"
-          opacity="0.12"
-        />
-        <rect
-          x="38"
-          y="14"
-          width="10"
-          height="34"
-          rx="2"
-          fill="var(--cat-accent)"
-          opacity="0.25"
-        />
+      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="cat-icon">
+        <rect x="8" y="32" width="10" height="16" rx="2" stroke="currentColor" strokeWidth="2.5" />
+        <rect x="23" y="22" width="10" height="26" rx="2" stroke="currentColor" strokeWidth="2.5" />
+        <rect x="38" y="14" width="10" height="34" rx="2" stroke="currentColor" strokeWidth="2.5" />
+        <rect x="8" y="32" width="10" height="16" rx="2" fill="currentColor" opacity="0.12" />
+        <rect x="23" y="22" width="10" height="26" rx="2" fill="currentColor" opacity="0.12" />
+        <rect x="38" y="14" width="10" height="34" rx="2" fill="var(--cat-accent)" opacity="0.25" />
         <path
           d="M12 28L25 20L38 12"
           stroke="var(--cat-accent)"

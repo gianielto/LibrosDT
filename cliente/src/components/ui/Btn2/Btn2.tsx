@@ -17,9 +17,7 @@ const Btn2: React.FC<Btn2Props> = ({
   className = "",
   ...rest
 }) => {
-  const [isMobile, setIsMobile] = useState(
-    window.innerWidth <= mobileBreakpoint,
-  );
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= mobileBreakpoint);
 
   useEffect(() => {
     const handleResize = () => {
