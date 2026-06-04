@@ -13,11 +13,7 @@ interface Props {
   onCreated: (autor: { id: number; nombre: string }) => void;
 }
 
-export const AutorModal = ({
-  nombreInicial = "",
-  onClose,
-  onCreated,
-}: Props) => {
+export const AutorModal = ({ nombreInicial = "", onClose, onCreated }: Props) => {
   const [nombre, setNombre] = useState(nombreInicial);
   const [slug, setSlug] = useState(
     nombreInicial
@@ -61,37 +57,23 @@ export const AutorModal = ({
       className="fixed inset-0 z-[60] bg-black/40 flex items-center justify-center"
       onClick={onClose}
     >
-      <div
-        className="bg-white rounded-xl w-full max-w-md p-6"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="bg-white rounded-xl w-full max-w-md p-6" onClick={(e) => e.stopPropagation()}>
         <h2 className="text-lg font-semibold mb-4">Nuevo autor</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label>Nombre</Label>
-            <Input
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              required
-            />
+            <Input value={nombre} onChange={(e) => setNombre(e.target.value)} required />
           </div>
 
           <div>
             <Label>Slug</Label>
-            <Input
-              value={slug}
-              onChange={(e) => setSlug(e.target.value)}
-              required
-            />
+            <Input value={slug} onChange={(e) => setSlug(e.target.value)} required />
           </div>
 
           <div>
             <Label>Nacionalidad</Label>
-            <Input
-              value={nacionalidad}
-              onChange={(e) => setNacionalidad(e.target.value)}
-            />
+            <Input value={nacionalidad} onChange={(e) => setNacionalidad(e.target.value)} />
           </div>
 
           <div>
@@ -106,12 +88,7 @@ export const AutorModal = ({
           {error && <p className="text-sm text-red-500">{error}</p>}
 
           <div className="flex gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              className="flex-1"
-              onClick={onClose}
-            >
+            <Button type="button" variant="outline" className="flex-1" onClick={onClose}>
               Cancelar
             </Button>
 

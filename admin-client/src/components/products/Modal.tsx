@@ -70,9 +70,7 @@ export const ProductoModal = ({
       : FORM_VACIO,
   );
   const [imagen, setImagen] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(
-    producto?.archivo_url ?? null,
-  );
+  const [preview, setPreview] = useState<string | null>(producto?.archivo_url ?? null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
@@ -138,8 +136,7 @@ export const ProductoModal = ({
   };
 
   const set =
-    (campo: keyof ProductoForm) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    (campo: keyof ProductoForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setForm((f) => ({ ...f, [campo]: e.target.value }));
 
   return (
@@ -173,11 +170,7 @@ export const ProductoModal = ({
               onClick={() => fileRef.current?.click()}
             >
               {preview ? (
-                <img
-                  src={preview}
-                  alt="preview"
-                  className="h-32 object-contain mx-auto rounded"
-                />
+                <img src={preview} alt="preview" className="h-32 object-contain mx-auto rounded" />
               ) : (
                 <p className="text-sm text-slate-400">
                   Clic para seleccionar imagen (JPG, PNG, WebP — máx. 5MB)
@@ -197,21 +190,11 @@ export const ProductoModal = ({
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
               <Label htmlFor="nombre">Nombre *</Label>
-              <Input
-                id="nombre"
-                value={form.nombre}
-                onChange={set("nombre")}
-                required
-              />
+              <Input id="nombre" value={form.nombre} onChange={set("nombre")} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="codigo">Código *</Label>
-              <Input
-                id="codigo"
-                value={form.codigo}
-                onChange={set("codigo")}
-                required
-              />
+              <Input id="codigo" value={form.codigo} onChange={set("codigo")} required />
             </div>
           </div>
 
@@ -318,12 +301,7 @@ export const ProductoModal = ({
           {error && <p className="text-sm text-red-500">{error}</p>}
 
           <div className="flex gap-3 pt-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onClose}
-              className="flex-1"
-            >
+            <Button type="button" variant="outline" onClick={onClose} className="flex-1">
               Cancelar
             </Button>
             <Button type="submit" disabled={loading} className="flex-1">

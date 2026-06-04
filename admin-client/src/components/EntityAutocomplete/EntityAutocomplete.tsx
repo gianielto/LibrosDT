@@ -129,10 +129,7 @@ export function EntityAutocomplete({
         onClick={() => inputRef.current?.focus()}
       >
         {selected.map((id) => (
-          <span
-            key={id}
-            className="bg-slate-200 px-2 py-1 rounded text-xs flex items-center gap-1"
-          >
+          <span key={id} className="bg-slate-200 px-2 py-1 rounded text-xs flex items-center gap-1">
             {cache[id]?.nombre ?? id}
             <button onClick={() => toggle(id)}>×</button>
           </span>

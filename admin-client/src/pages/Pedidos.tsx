@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import api from "../api/axios";
 import type { Pedido, PaginatedResponse } from "../types";
 import { Button } from "@/components/ui/button";
@@ -34,14 +34,8 @@ interface DetalleModalProps {
   onStatusCambiado: () => void;
 }
 
-function DetalleModal({
-  pedido,
-  onClose,
-  onStatusCambiado,
-}: DetalleModalProps) {
-  const [nuevoStatus, setNuevoStatus] = useState(
-    pedido.status?.toString() ?? "1",
-  );
+function DetalleModal({ pedido, onClose, onStatusCambiado }: DetalleModalProps) {
+  const [nuevoStatus, setNuevoStatus] = useState(pedido.status?.toString() ?? "1");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -57,9 +51,7 @@ function DetalleModal({
       onClose();
     } catch (err) {
       const error = err as AxiosError<{ message: string }>;
-      setError(
-        error.response?.data?.message ?? "Error al actualizar el status",
-      );
+      setError(error.response?.data?.message ?? "Error al actualizar el status");
     } finally {
       setLoading(false);
     }
@@ -92,26 +84,18 @@ function DetalleModal({
         <div className="px-6 py-5 space-y-5">
           {/* Datos del cliente */}
           <div className="bg-slate-50 rounded-lg p-4 space-y-1">
-            <p className="text-xs text-slate-400 uppercase tracking-wide font-medium">
-              Cliente
-            </p>
+            <p className="text-xs text-slate-400 uppercase tracking-wide font-medium">Cliente</p>
             {pedido.cliente ? (
               <>
                 <p className="text-sm font-medium text-slate-800">
                   {pedido.cliente.nombre} {pedido.cliente.apellidos}
                 </p>
-                <p className="text-sm text-slate-500">
-                  {pedido.cliente.correo}
-                </p>
+                <p className="text-sm text-slate-500">{pedido.cliente.correo}</p>
                 {pedido.cliente.telefono && (
-                  <p className="text-sm text-slate-500">
-                    {pedido.cliente.telefono}
-                  </p>
+                  <p className="text-sm text-slate-500">{pedido.cliente.telefono}</p>
                 )}
                 {pedido.cliente.direccion && (
-                  <p className="text-sm text-slate-500">
-                    {pedido.cliente.direccion}
-                  </p>
+                  <p className="text-sm text-slate-500">{pedido.cliente.direccion}</p>
                 )}
               </>
             ) : (
@@ -155,9 +139,7 @@ function DetalleModal({
             </div>
             <div className="flex justify-between items-center pt-3 mt-1">
               <p className="text-sm font-medium text-slate-600">Total</p>
-              <p className="text-base font-semibold text-slate-900">
-                ${totalPedido.toFixed(2)}
-              </p>
+              <p className="text-base font-semibold text-slate-900">${totalPedido.toFixed(2)}</p>
             </div>
           </div>
 
@@ -206,43 +188,70 @@ export default function Pedidos() {
   const [loading, setLoading] = useState(true);
   const [pedidoDetalle, setPedidoDetalle] = useState<Pedido | null>(null);
 
-  const cargarPedidos = async (page = 1) => {
-    setLoading(true);
-    try {
-      const params: Record<string, string> = {
-        page: page.toString(),
-        limit: "15",
-      };
-      if (filtroStatus) params.status = filtroStatus;
+  // const cargarPedidos = async (page = 1) => {
+  //   setLoading(true);
+  //   try {
+  //     const params: Record<string, string> = {
+  //       page: page.toString(),
+  //       limit: "15",
+  //     };
+  //     if (filtroStatus) params.status = filtroStatus;
 
-      const { data } = await api.get<PaginatedResponse<Pedido>>("/pedidos", {
-        params,
-      });
-      setPedidos(data.data);
-      setMeta({
-        total: data.meta.total,
-        page: data.meta.page,
-        totalPages: data.meta.totalPages,
-      });
-    } catch {
-      // error silencioso
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     const { data } = await api.get<PaginatedResponse<Pedido>>("/pedidos", {
+  //       params,
+  //     });
+  //     setPedidos(data.data);
+  //     setMeta({
+  //       total: data.meta.total,
+  //       page: data.meta.page,
+  //       totalPages: data.meta.totalPages,
+  //     });
+  //   } catch {
+  //     // error silencioso
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  const cargarPedidos = useCallback(
+    async (page = 1) => {
+      setLoading(true);
 
+      try {
+        const params: Record<string, string> = {
+          page: page.toString(),
+          limit: "15",
+        };
+
+        if (filtroStatus) {
+          params.status = filtroStatus;
+        }
+
+        const { data } = await api.get<PaginatedResponse<Pedido>>("/pedidos", { params });
+
+        setPedidos(data.data);
+        setMeta({
+          total: data.meta.total,
+          page: data.meta.page,
+          totalPages: data.meta.totalPages,
+        });
+      } catch {
+        // error silencioso
+      } finally {
+        setLoading(false);
+      }
+    },
+    [filtroStatus],
+  );
   useEffect(() => {
     cargarPedidos(1);
-  }, [filtroStatus]);
+  }, [cargarPedidos]);
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-slate-900">Pedidos</h1>
-          <p className="text-sm text-slate-500 mt-1">
-            {meta.total} pedidos en total
-          </p>
+          <p className="text-sm text-slate-500 mt-1">{meta.total} pedidos en total</p>
         </div>
       </div>
 
@@ -280,32 +289,17 @@ export default function Pedidos() {
                 <thead>
                   <tr className="border-b bg-slate-50 text-left">
                     <th className="px-4 py-3 font-medium text-slate-600">#</th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Fecha
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Cliente
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Productos
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Total
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Status
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Acciones
-                    </th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Fecha</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Cliente</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Productos</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Total</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Status</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Acciones</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {pedidos.map((p) => (
-                    <tr
-                      key={p.id}
-                      className="hover:bg-slate-50 transition-colors"
-                    >
+                    <tr key={p.id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-4 py-3 text-slate-500">#{p.id}</td>
                       <td className="px-4 py-3 text-slate-600">
                         {new Date(p.fecha).toLocaleDateString("es-MX", {
@@ -320,9 +314,7 @@ export default function Pedidos() {
                             <p className="font-medium text-slate-800">
                               {p.cliente.nombre} {p.cliente.apellidos}
                             </p>
-                            <p className="text-xs text-slate-400">
-                              {p.cliente.correo}
-                            </p>
+                            <p className="text-xs text-slate-400">{p.cliente.correo}</p>
                           </div>
                         ) : (
                           <span className="text-slate-300">—</span>
@@ -330,9 +322,7 @@ export default function Pedidos() {
                       </td>
                       <td className="px-4 py-3 text-slate-600">
                         {p.pedidos_productos.length}{" "}
-                        {p.pedidos_productos.length === 1
-                          ? "producto"
-                          : "productos"}
+                        {p.pedidos_productos.length === 1 ? "producto" : "productos"}
                       </td>
                       <td className="px-4 py-3 font-medium text-slate-800">
                         ${p.total.toFixed(2)}
@@ -348,11 +338,7 @@ export default function Pedidos() {
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => setPedidoDetalle(p)}
-                        >
+                        <Button size="sm" variant="outline" onClick={() => setPedidoDetalle(p)}>
                           Ver detalle
                         </Button>
                       </td>

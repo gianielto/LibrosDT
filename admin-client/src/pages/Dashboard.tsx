@@ -66,18 +66,14 @@ export default function Dashboard() {
         <Card>
           <CardContent className="pt-6">
             <p className="text-sm text-slate-500">Pedidos este mes</p>
-            <p className="text-3xl font-semibold text-slate-900 mt-1">
-              {data.pedidosMes}
-            </p>
+            <p className="text-3xl font-semibold text-slate-900 mt-1">{data.pedidosMes}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardContent className="pt-6">
             <p className="text-sm text-slate-500">Clientes activos</p>
-            <p className="text-3xl font-semibold text-slate-900 mt-1">
-              {data.totalClientes}
-            </p>
+            <p className="text-3xl font-semibold text-slate-900 mt-1">{data.totalClientes}</p>
           </CardContent>
         </Card>
       </div>
@@ -86,9 +82,7 @@ export default function Dashboard() {
         {/* Pedidos por status */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base font-medium">
-              Pedidos por status
-            </CardTitle>
+            <CardTitle className="text-base font-medium">Pedidos por status</CardTitle>
           </CardHeader>
           <CardContent>
             {data.pedidosPorStatus.length === 0 ? (
@@ -96,14 +90,10 @@ export default function Dashboard() {
             ) : (
               <div className="space-y-3">
                 {data.pedidosPorStatus.map((s) => (
-                  <div
-                    key={s.status}
-                    className="flex items-center justify-between"
-                  >
+                  <div key={s.status} className="flex items-center justify-between">
                     <span
                       className={`text-xs font-medium px-2.5 py-1 rounded-full ${
-                        STATUS_COLORS[s.status ?? 1] ??
-                        "bg-slate-100 text-slate-700"
+                        STATUS_COLORS[s.status ?? 1] ?? "bg-slate-100 text-slate-700"
                       }`}
                     >
                       {s.label}
@@ -126,16 +116,12 @@ export default function Dashboard() {
           <CardHeader>
             <CardTitle className="text-base font-medium">
               Stock bajo{" "}
-              <span className="text-slate-400 font-normal text-sm">
-                (menos de 5 unidades)
-              </span>
+              <span className="text-slate-400 font-normal text-sm">(menos de 5 unidades)</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             {data.productosBajoStock.length === 0 ? (
-              <p className="text-sm text-slate-400">
-                Todos los productos tienen stock suficiente
-              </p>
+              <p className="text-sm text-slate-400">Todos los productos tienen stock suficiente</p>
             ) : (
               <div className="space-y-2">
                 {data.productosBajoStock.map((p) => (
@@ -144,9 +130,7 @@ export default function Dashboard() {
                     className="flex items-center justify-between py-1.5 border-b border-slate-100 last:border-0"
                   >
                     <div>
-                      <p className="text-sm font-medium text-slate-800">
-                        {p.nombre}
-                      </p>
+                      <p className="text-sm font-medium text-slate-800">{p.nombre}</p>
                       <p className="text-xs text-slate-400">{p.codigo}</p>
                     </div>
                     <Badge

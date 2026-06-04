@@ -1,12 +1,6 @@
 // Productos.tsx
 import api from "../api/axios";
-import type {
-  Producto,
-  Categoria,
-  PaginatedResponse,
-  Editorial,
-  Autor,
-} from "../types";
+import type { Producto, Categoria, PaginatedResponse, Editorial, Autor } from "../types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge/badge";
@@ -35,9 +29,7 @@ export default function Productos() {
   const [editorialFiltro, setEditorialFiltro] = useState("");
   const [loading, setLoading] = useState(true);
   const [modalAbierto, setModalAbierto] = useState(false);
-  const [productoEditando, setProductoEditando] = useState<Producto | null>(
-    null,
-  );
+  const [productoEditando, setProductoEditando] = useState<Producto | null>(null);
 
   // const cargarProductos = async (page = 1) => {
   const cargarProductos = useCallback(
@@ -56,10 +48,7 @@ export default function Productos() {
         if (editorialFiltro && editorialFiltro !== "all") {
           params.id_editorial = editorialFiltro;
         }
-        const { data } = await api.get<PaginatedResponse<Producto>>(
-          "/productos",
-          { params },
-        );
+        const { data } = await api.get<PaginatedResponse<Producto>>("/productos", { params });
         setProductos(data.data);
         setMeta({
           total: data.meta.total,
@@ -78,9 +67,7 @@ export default function Productos() {
   // Cargar categorías una sola vez
   useEffect(() => {
     api.get<Categoria[]>("/categorias").then((res) => setCategorias(res.data));
-    api
-      .get<Editorial[]>("/editoriales")
-      .then((res) => setEditoriales(res.data));
+    api.get<Editorial[]>("/editoriales").then((res) => setEditoriales(res.data));
 
     api.get<Autor[]>("/autores").then((res) => setAutores(res.data));
   }, []);
@@ -124,9 +111,7 @@ export default function Productos() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-slate-900">Productos</h1>
-          <p className="text-sm text-slate-500 mt-1">
-            {meta.total} productos en total
-          </p>
+          <p className="text-sm text-slate-500 mt-1">{meta.total} productos en total</p>
         </div>
         <Button onClick={abrirNuevo}>+ Nuevo producto</Button>
       </div>
@@ -176,44 +161,25 @@ export default function Productos() {
             </div>
           ) : productos.length === 0 ? (
             <div className="flex items-center justify-center h-48">
-              <p className="text-sm text-slate-400">
-                No se encontraron productos
-              </p>
+              <p className="text-sm text-slate-400">No se encontraron productos</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b bg-slate-50 text-left">
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Imagen
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Nombre
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Código
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Categoría
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Precio
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Stock
-                    </th>
-                    <th className="px-4 py-3 font-medium text-slate-600">
-                      Acciones
-                    </th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Imagen</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Nombre</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Código</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Categoría</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Precio</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Stock</th>
+                    <th className="px-4 py-3 font-medium text-slate-600">Acciones</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {productos.map((p) => (
-                    <tr
-                      key={p.id}
-                      className="hover:bg-slate-50 transition-colors"
-                    >
+                    <tr key={p.id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-4 py-3">
                         {p.archivo_url ? (
                           <img
@@ -227,22 +193,16 @@ export default function Productos() {
                           </div>
                         )}
                       </td>
-                      <td className="px-4 py-3 font-medium text-slate-800">
-                        {p.nombre}
-                      </td>
+                      <td className="px-4 py-3 font-medium text-slate-800">{p.nombre}</td>
                       <td className="px-4 py-3 text-slate-500">{p.codigo}</td>
                       <td className="px-4 py-3">
                         {p.categoria ? (
-                          <Badge variant="secondary">
-                            {p.categoria.nombre}
-                          </Badge>
+                          <Badge variant="secondary">{p.categoria.nombre}</Badge>
                         ) : (
                           <span className="text-slate-300 text-xs">—</span>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-slate-700">
-                        ${p.costo?.toFixed(2)}
-                      </td>
+                      <td className="px-4 py-3 text-slate-700">${p.costo?.toFixed(2)}</td>
                       <td className="px-4 py-3">
                         <span
                           className={`font-medium ${
@@ -258,11 +218,7 @@ export default function Productos() {
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex gap-2">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => abrirEditar(p)}
-                          >
+                          <Button size="sm" variant="outline" onClick={() => abrirEditar(p)}>
                             Editar
                           </Button>
                           <Button

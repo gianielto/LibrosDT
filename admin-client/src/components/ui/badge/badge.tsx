@@ -58,12 +58,7 @@ type BadgeProps = React.ComponentProps<"span"> &
     asChild?: boolean;
   };
 
-function Badge({
-  className,
-  variant = "default",
-  asChild = false,
-  ...props
-}: BadgeProps) {
+function Badge({ className, variant = "default", asChild = false, ...props }: BadgeProps) {
   const Comp = asChild ? Slot.Root : "span";
 
   return (
